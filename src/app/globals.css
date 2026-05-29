@@ -1,26 +1,552 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   SSAI Design Tokens — Tailwind v4 CSS-first config
+   Source of truth: DESIGN.md + business/DESIGN.md
+   ============================================================ */
+
+@theme {
+  /* Brand Colors (immutable) */
+  --color-ssai-blue: #254bf1;
+  --color-ssai-coral: #FF3C5B;
+
+  /* Mode-aware accent — resolves to blue (normal) or coral (meta).
+     Use `bg-accent`, `text-accent`, etc. for anything that should
+     switch color with the mode. Keep ssai-blue / ssai-coral for
+     elements that are permanently one brand color. */
+  --color-accent: var(--accent);
+
+  /* Mode-aware semantic colors — these reference CSS variables
+     set by .mode-normal / .mode-meta so every Tailwind utility
+     (text-ink, text-text-mid, bg-white, border-rule, etc.)
+     automatically adapts to the active mode. */
+  --color-ink: var(--surface-ink);
+  --color-text-DEFAULT: var(--surface-text);
+  --color-text-mid: var(--surface-text-mid);
+  --color-text-muted: var(--surface-text-muted);
+  --color-rule: var(--surface-rule);
+  --color-white: var(--surface-card);
+
+  /* Status Colors */
+  --color-status-healthy: #2d8a4e;
+  --color-status-warning: #b45309;
+  --color-status-danger: #dc2626;
+
+  /* Label Colors — distinct hue per thread category */
+  --color-label-cost: #0d7377;
+  --color-label-security: #9f1239;
+  --color-label-infra: #c2410c;
+
+  /* Typography — Tailwind font-family utilities (font-title, font-body, font-mono).
+     Next.js localFont injects --font-face-* on <html>; we alias them here
+     so Tailwind generates proper font-family utilities without circular refs. */
+  --font-title: var(--font-face-title), "Georgia", serif;
+  --font-body: var(--font-face-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* Box Shadows */
+  --shadow-surface: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-overlay: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-focus: 0 0 0 2px rgba(37, 75, 241, 0.25);
+  --shadow-composer: 0 2px 12px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-composer-focus: 0 2px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(37, 75, 241, 0.1);
+  --shadow-toggle: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-card-meta: 0 2px 12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  /* Layer-tier shadows (edra-inspired deliberate depth) */
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-layer-1: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-layer-2: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-layer-3: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+  /* Floating surface shadows (hairline border via 0.5px spread + soft depth) */
+  --shadow-float: 0 0 0 0.5px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 20px rgba(0, 0, 0, 0.03);
+  --shadow-float-active: 0 0 0 0.5px rgba(0, 0, 0, 0.1), 0 2px 12px rgba(0, 0, 0, 0.06), 0 6px 24px rgba(0, 0, 0, 0.04);
+
+  /* Dropdown / popover animations */
+  --animate-dropdown-in: dropdown-in 200ms var(--ease-out-expo);
+  --animate-dropdown-out: dropdown-out 150ms var(--ease-out);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
+@keyframes dropdown-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+}
+
+/* ============================================================
+   CSS Custom Properties (non-Tailwind access)
+   ============================================================ */
+
+:root {
+  --ssai-blue: #254bf1;
+  --ssai-coral: #FF3C5B;
+  --bg-light: #fffefc;
+  --bg-dark: #131313;
+  --ink: #111111;
+  --text: #222222;
+  --text-mid: #4d4d4d;
+  --text-muted: #888888;
+  --ink-dark: #f5f5f0;
+  --text-dark: #e0ddd6;
+  --text-mid-dark: #a8a8a0;
+  --text-muted-dark: #6b6b65;
+  --rule: #d8d4cc;
+  --rule-dark: #2a2a2a;
+  --surface-meta: #1a1a1a;
+}
+
+/* ============================================================
+   Mode-dependent CSS variables
+   Components use --surface-* tokens for mode-aware rendering
+   ============================================================ */
+
+.mode-normal {
+  --accent: #254bf1;
+  --surface-bg: var(--bg-light);
+  --surface-text: var(--text);
+  --surface-text-mid: var(--text-mid);
+  --surface-text-muted: var(--text-muted);
+  --surface-ink: var(--ink);
+  --surface-rule: var(--rule);
+  --surface-card: #ffffff;
+  --surface-hover: rgba(0, 0, 0, 0.03);
+  --surface-active: rgba(0, 0, 0, 0.05);
+}
+
+.mode-meta {
+  --accent: #FF3C5B;
+  --surface-bg: #131313;
+  --surface-text: var(--text-dark);
+  --surface-text-mid: var(--text-mid-dark);
+  --surface-text-muted: var(--text-muted-dark);
+  --surface-ink: var(--ink-dark);
+  --surface-rule: #2a2a2a;
+  --surface-card: #1a1a1a;
+  --surface-elevated: #222222;
+  --surface-overlay: #2a2a2a;
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-active: rgba(255, 255, 255, 0.08);
+
+  /* Meta-mode layer shadows (stronger to read against dark ground) */
+  --shadow-layer-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-layer-2: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-layer-3: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  /* Meta-mode floating surface shadows */
+  --shadow-float: 0 0 0 0.5px rgba(255, 255, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-float-active: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 2px 12px rgba(0, 0, 0, 0.4), 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   Base Resets
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--surface-bg, var(--bg-light));
+  color: var(--surface-text, var(--text));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   Pointer Cursor — all interactive elements
+   Browsers removed cursor:pointer from buttons in the UA
+   stylesheet; we restore it for all clickable elements.
+   ============================================================ */
+
+button,
+a,
+[role="button"],
+[role="link"],
+[role="tab"],
+[role="menuitem"],
+[role="option"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+select,
+summary,
+label[for] {
+  cursor: pointer;
+}
+
+/* ============================================================
+   Mode Switch Transition (300ms crossfade)
+
+   Uses transition-duration + transition-property on html so that
+   inherited color/background values transition when mode-* class
+   swaps. Individual components can add their OWN transitions
+   (hover, panel collapse, etc.) without clobbering this.
+   ============================================================ */
+
+.mode-switching,
+.mode-switching * {
+  transition-property: background-color, border-color, color;
+  transition-duration: 300ms;
+  transition-timing-function: var(--ease-in-out, ease-in-out);
+}
+
+/* ============================================================
+   Motion Utilities — these ADD to the mode transition, not replace it
+   ============================================================ */
+
+.transition-micro {
+  transition-property: background-color, border-color, color, opacity, box-shadow, transform;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out, ease-out);
+}
+
+.transition-panel {
+  transition-property: background-color, border-color, color, transform, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: var(--ease-out, ease-out);
+}
+
+.transition-state {
+  transition-property: background-color, border-color, color, opacity, box-shadow, transform;
+  transition-duration: 300ms;
+  transition-timing-function: var(--ease-in-out, ease-in-out);
+}
+
+/* ============================================================
+   Mode Toggle — the Normal/Meta slider
+   ============================================================ */
+
+.mode-toggle-knob {
+  transition:
+    transform 450ms var(--ease-out-expo),
+    background-color 300ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
+  will-change: transform;
+}
+
+.mode-toggle:hover .mode-toggle-knob {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-toggle-knob {
+    transition-duration: 0ms;
+  }
+}
+
+/* ============================================================
+   Sidebar Toggle — the Threads/Agents slider (meta mode)
+   ============================================================ */
+
+.sidebar-toggle-knob {
+  transition:
+    transform 450ms var(--ease-out-expo),
+    background-color 300ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
+  will-change: transform;
+}
+
+.sidebar-toggle:hover .sidebar-toggle-knob {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-toggle-knob {
+    transition-duration: 0ms;
+  }
+}
+
+/* ============================================================
+   Settle Reveal — standard disclosure animation
+
+   Parametric via CSS custom properties. Override on the element
+   to scale motion proportionally to the element's visual size:
+
+     --settle-duration   (default: 250ms)  — total transition time
+     --settle-distance   (default: 4px)    — translateY/X settle offset
+
+   Size guidance:
+     Small  (≤64px):   defaults are correct (250ms / 4px)
+     Medium (64–200px): 300ms / 6px
+     Large  (≥200px):   350ms / 8px
+
+   Usage:
+     <div class="settle-reveal" data-open={isOpen}>
+       <div>
+         <div class="settle-reveal-inner">
+           ...content...
+         </div>
+       </div>
+     </div>
+
+   For large panels, override on the wrapper:
+     <div class="settle-reveal-x"
+          data-open={isOpen}
+          style={{ '--settle-duration': '350ms', '--settle-distance': '8px' }}>
+   ============================================================ */
+
+.settle-reveal {
+  --settle-duration: 250ms;
+  --settle-distance: 4px;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--settle-duration) var(--ease-out-expo),
+    opacity var(--settle-duration) var(--ease-out-expo);
+}
+
+.settle-reveal[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.settle-reveal > * {
+  overflow: hidden;
+}
+
+.settle-reveal-inner {
+  transform: translateY(calc(-1 * var(--settle-distance)));
+  transition: transform var(--settle-duration) var(--ease-out-expo);
+}
+
+.settle-reveal[data-open="true"] .settle-reveal-inner {
+  transform: translateY(0);
+}
+
+/* -------- Horizontal variant (sidebars, panels) -------- */
+
+.settle-reveal-x {
+  --settle-duration: 250ms;
+  --settle-distance: 4px;
+  display: grid;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-columns var(--settle-duration) var(--ease-out-expo),
+    opacity var(--settle-duration) var(--ease-out-expo);
+}
+
+.settle-reveal-x[data-open="true"] {
+  grid-template-columns: 1fr;
+  opacity: 1;
+}
+
+.settle-reveal-x > * {
+  overflow: hidden;
+}
+
+.settle-reveal-x-inner {
+  transform: translateX(calc(-1 * var(--settle-distance)));
+  transition: transform var(--settle-duration) var(--ease-out-expo);
+}
+
+.settle-reveal-x[data-open="true"] .settle-reveal-x-inner {
+  transform: translateX(0);
+}
+
+/* Right-side variant: settle from the right */
+.settle-reveal-x-right .settle-reveal-x-inner {
+  transform: translateX(var(--settle-distance));
+}
+
+.settle-reveal-x-right[data-open="true"] .settle-reveal-x-inner {
+  transform: translateX(0);
+}
+
+/* Reduced motion: instant reveal, no spatial movement */
+@media (prefers-reduced-motion: reduce) {
+  .settle-reveal,
+  .settle-reveal-x {
+    transition-duration: 0.01ms !important;
+  }
+  .settle-reveal-inner,
+  .settle-reveal-x-inner {
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+  [data-state="open"][class*="animate-dropdown"],
+  [data-state="closed"][class*="animate-dropdown"] {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Logo Pulse (when SSAI is working)
+   ============================================================ */
+
+@keyframes ssai-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Status dot glow animations — 7px dot, 5px glow spread */
+@keyframes dot-glow-blue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(77, 111, 247, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(77, 111, 247, 0); }
+}
+
+@keyframes dot-glow-warning {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(217, 119, 6, 0); }
+}
+
+@keyframes dot-glow-danger {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(239, 68, 68, 0); }
+}
+
+.dot-glow-blue {
+  animation: dot-glow-blue 2s ease-in-out infinite;
+}
+
+.dot-glow-warning {
+  animation: dot-glow-warning 2s ease-in-out infinite;
+}
+
+.dot-glow-danger {
+  animation: dot-glow-danger 2s ease-in-out infinite;
+}
+
+.ssai-working .logo-mark {
+  animation: ssai-pulse 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   Prefers Reduced Motion
+   Disables all animations except countdown bar movement.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Countdown bar retains minimal motion for functional clarity */
+  .countdown-bar {
+    transition-duration: 100ms !important;
+  }
+}
+
+/* ============================================================
+   Focus Indicators (Accessibility)
+   Only show focus ring for keyboard navigation, never on click.
+   Placed in @layer base so Tailwind utilities (outline-none) can
+   override per-component when needed.
+   ============================================================ */
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Suppress outline on mouse/pointer focus (click) */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Text inputs & textareas always report :focus-visible (they accept
+     keyboard input), so the global ring fires on every click.
+     Suppress it — these elements use their own border/shadow cues. */
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
+
+  /* Components with their own focus mechanism opt out */
+  [data-focus-self] {
+    outline: none !important;
+  }
+}
+
+/* ============================================================
+   Meta Mode Depth System
+   Automatic elevation for cards, popovers, and dialogs
+   ============================================================ */
+
+.mode-meta [data-slot="card"],
+.mode-meta [data-slot="dialog-content"] {
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-card-meta);
+}
+
+.mode-meta [data-slot="popover-content"],
+.mode-meta [data-slot="select-content"],
+.mode-meta [data-slot="dropdown-menu-content"] {
+  background: var(--surface-elevated);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-card-meta);
+}
+
+/* ============================================================
+   Scrollbar styling (subtle, matches brand)
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-rule, var(--rule));
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }

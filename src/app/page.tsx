@@ -1,65 +1,48 @@
 import Image from "next/image";
+import { HeroThreadSidebar } from "@/components/hero-thread-sidebar";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <main className="min-h-screen bg-[var(--surface-bg)] text-[var(--surface-text)]">
+      <header className="mx-auto flex h-14 max-w-6xl items-center justify-between border-b border-rule px-5">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/logo-full.png"
+          alt="SSAI"
+          width={80}
+          height={32}
           priority
+          className="h-8 w-auto"
+          style={{ width: "auto" }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <nav className="hidden items-center gap-6 text-[13px] font-medium text-text-muted sm:flex">
+          <a className="transition-micro hover:text-text-mid" href="#surface">Surface</a>
+          <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">Contact</a>
+        </nav>
+      </header>
+
+      <section id="surface" className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[0.95fr_1.05fr] md:items-center md:py-24">
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-normal text-text-muted">
+            Cognitive DevOps engineer
           </p>
+          <h1 className="mt-5 max-w-[680px] font-title text-[clamp(42px,7vw,82px)] leading-[0.98] text-ink">
+            Teams without DevOps still need DevOps judgment.
+          </h1>
+          <p className="mt-6 max-w-[600px] text-[17px] leading-7 text-text-mid">
+            SSAI self-onboards to your cloud and Kubernetes stack, handles operational work, and leaves an inspectable record of what it did and why.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a className="inline-flex h-9 items-center justify-center rounded-lg bg-ssai-blue px-4 text-[14px] font-medium text-white transition-micro hover:bg-ssai-blue/90" href="mailto:hello@ssai.dev">
+              Book a technical walkthrough
+            </a>
+            <a className="inline-flex h-9 items-center justify-center rounded-lg border border-rule px-4 text-[14px] font-medium text-text transition-micro hover:bg-[var(--surface-hover)]" href="#surface">
+              View product surface
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <HeroThreadSidebar />
+      </section>
+    </main>
   );
 }
