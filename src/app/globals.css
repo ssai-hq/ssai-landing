@@ -188,6 +188,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.technical-grid {
+  background-image:
+    linear-gradient(to right, rgba(17, 17, 17, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.scroll-thesis-line {
+  color: color-mix(in srgb, var(--surface-text-muted) 28%, transparent);
+  transition:
+    color 420ms var(--ease-out-expo),
+    transform 420ms var(--ease-out-expo);
+}
+
+.scroll-thesis-line.is-active {
+  color: var(--surface-ink);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-thesis-line {
+    color: var(--surface-ink);
+    transform: none;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

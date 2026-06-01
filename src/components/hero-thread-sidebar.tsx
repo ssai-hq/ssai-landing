@@ -323,7 +323,7 @@ export function HeroThreadSidebar() {
             <button className="h-9 rounded-lg border border-rule px-4 text-[14px] font-medium text-text transition-micro hover:bg-[var(--surface-hover)]">
               Veto rollback
             </button>
-            <button className="h-9 rounded-lg bg-ssai-blue px-4 text-[14px] font-medium text-white transition-micro hover:bg-ssai-blue/90">
+            <button className="h-9 rounded-lg bg-ssai-blue px-4 text-[14px] font-medium transition-micro hover:bg-ssai-blue/90" style={{ color: "#fffefc" }}>
               Confirm now
             </button>
           </div>
