@@ -201,10 +201,10 @@ export function HeroThreadSidebar() {
   const [filterOpen, setFilterOpen] = useState(false);
 
   return (
-    <div className="relative mx-auto w-full max-w-[620px]">
+    <div className="relative mx-auto w-full max-w-[590px]">
       <div className="absolute -left-4 top-9 hidden h-[78%] w-px bg-rule md:block" />
-      <div className="grid overflow-hidden rounded-2xl border border-rule bg-[var(--surface-card)] shadow-[var(--shadow-float)] md:grid-cols-[280px_1fr]">
-        <aside className="flex h-[560px] min-w-[280px] flex-col overflow-hidden border-b border-rule bg-[var(--surface-bg,var(--bg-light))] md:border-b-0 md:border-r">
+      <div className="grid overflow-hidden rounded-2xl border border-rule bg-[var(--surface-card)] shadow-[var(--shadow-float)] md:grid-cols-[260px_1fr]">
+        <aside className="flex h-[380px] min-w-[260px] flex-col overflow-hidden border-b border-rule bg-[var(--surface-bg,var(--bg-light))] md:h-[500px] md:border-b-0 md:border-r">
           <div className="flex items-center justify-between px-3 pb-2 pt-3">
             <span className="text-[13px] font-semibold text-ink">Threads</span>
             <div className="flex items-center gap-1">
@@ -290,19 +290,19 @@ export function HeroThreadSidebar() {
           </div>
         </aside>
 
-        <section className="min-h-[420px] bg-[var(--surface-card)] p-5 md:min-h-0">
+        <section className="hidden min-h-[390px] bg-[var(--surface-card)] p-4 md:block md:min-h-0">
           <div className="flex items-center gap-2 font-mono text-[12px] text-text-muted">
             <Clock3 className="h-4 w-4" />
             prod / checkout-api / run_4831
           </div>
-          <h2 className="mt-4 font-title text-[28px] leading-tight text-ink">
+          <h2 className="mt-3 font-title text-[24px] leading-tight text-ink">
             SSAI prepared the rollback. Human veto window is active.
           </h2>
-          <p className="mt-3 text-[15px] leading-6 text-text-mid">
+          <p className="mt-3 text-[14px] leading-6 text-text-mid">
             Error rate crossed policy threshold after deploy v2.3.2. Canary logs show repeated payment-provider timeouts. Rollback target v2.3.1 passed the last health check.
           </p>
 
-          <div className="mt-6 rounded-xl border border-rule p-4">
+          <div className="mt-5 rounded-xl border border-rule p-4">
             <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-text-muted">Evidence</p>
             <div className="mt-3 space-y-3 text-[13px] text-text-mid">
               <div className="flex items-start gap-2">
@@ -316,10 +316,10 @@ export function HeroThreadSidebar() {
             </div>
           </div>
 
-          <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-rule">
+          <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-rule">
             <div className="h-full w-[72%] rounded-full bg-ssai-blue" />
           </div>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-between">
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-between">
             <button className="h-9 rounded-lg border border-rule px-4 text-[14px] font-medium text-text transition-micro hover:bg-[var(--surface-hover)]">
               Veto rollback
             </button>

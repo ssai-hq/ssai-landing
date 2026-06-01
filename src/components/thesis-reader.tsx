@@ -1,64 +1,82 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-const thesisLines = [
-  "For years, production operations lived in dashboards, runbooks, Slack archaeology, and the heads of the engineers who happened to know the system best.",
-  "That era is ending.",
-  "The next operational owner will not be another dashboard. It will be a cognitive DevOps engineer that can receive work, inspect evidence, act within policy, and remember what it learned.",
-  "SSAI is building that employee.",
-  "The interface is not the workflow. It is the record, the policy surface, the memory review, the simulation lab, and the place where rare human judgment enters.",
-  "Normal Mode operates the customer's infrastructure. Meta Mode operates the agent system that operates the infrastructure.",
-  "The goal is not a human clicking approve forever. The goal is an organization prepared for a time where operational work is delegated, inspected, evaluated, and continually improved.",
+const thesisParagraphs = [
+  "For decades, implementation knowledge has lived in someone's head, a forgotten email thread, or a call nobody properly documented. Every project started from scratch. Every team reinvented the wheel.",
+  "That era is over.",
+  "Software implementation in the next decade will be won by the teams that turn every project into institutional knowledge and every engagement into a foundation for the next one.",
+  "SSAI is building agentic systems to enable this.",
 ];
 
+// Pre-compute word structure at module level
+const paragraphWords = thesisParagraphs.map((p) => p.split(/\s+/));
+let _idx = 0;
+const wordEntries = paragraphWords.map((words) =>
+  words.map((word) => ({ word, idx: _idx++ }))
+);
+
 export function ThesisReader() {
-  const [active, setActive] = useState(0);
-  const refs = useRef<Array<HTMLParagraphElement | null>>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const c = containerRef.current;
+    if (!c) return;
+    const words = c.querySelectorAll<HTMLSpanElement>("[data-wi]");
+    const N = words.length;
+    if (!N) return;
 
-        if (visible?.target instanceof HTMLElement) {
-          const index = Number(visible.target.dataset.index);
-          if (!Number.isNaN(index)) setActive(index);
-        }
-      },
-      {
-        rootMargin: "-30% 0px -45% 0px",
-        threshold: [0.2, 0.4, 0.6, 0.8],
+    function tick() {
+      const r = c!.getBoundingClientRect();
+      const s = -r.top;
+      const tot = c!.offsetHeight - window.innerHeight;
+      if (tot <= 0) return;
+      const p = Math.max(0, Math.min(1, s / tot));
+      const wp = p * (N + 4) - 2;
+      for (let i = 0; i < N; i++) {
+        const d = i - wp;
+        let op: number;
+        if (d < -1) op = 1;
+        else if (d < 0) op = 0.5 + 0.5 * -d;
+        else if (d < 1) op = 0.15 + 0.35 * (1 - d);
+        else op = 0.15;
+        words[i].style.opacity = String(op);
       }
-    );
+    }
 
-    refs.current.forEach((node) => {
-      if (node) observer.observe(node);
-    });
-
-    return () => observer.disconnect();
+    tick();
+    window.addEventListener("scroll", tick, { passive: true });
+    return () => window.removeEventListener("scroll", tick);
   }, []);
 
   return (
-    <div className="mx-auto max-w-[920px] px-5 py-20 md:py-32">
-      <div className="space-y-28 md:space-y-36">
-        {thesisLines.map((line, index) => (
-          <p
-            key={line}
-            ref={(node) => {
-              refs.current[index] = node;
-            }}
-            data-index={index}
-            className={[
-              "scroll-thesis-line font-title text-[clamp(34px,5vw,64px)] leading-[1.12]",
-              index === active ? "is-active" : "",
-            ].join(" ")}
-          >
-            {line}
+    <div
+      id="thesis-scroll"
+      ref={containerRef}
+      style={{ height: "400vh" }}
+      className="relative"
+    >
+      <div className="sticky top-0 h-screen flex flex-col justify-center">
+        <div className="mx-auto w-full max-w-[760px] px-8 md:px-12">
+          <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
+            Thesis
           </p>
-        ))}
+
+          {wordEntries.map((words, pIdx) => (
+            <p
+              key={pIdx}
+              className="thesis-scroll-line mb-16 last:mb-0"
+              style={{ color: "var(--surface-ink)" }}
+            >
+              {words.map(({ word, idx }, wIdx) => (
+                <span key={wIdx} data-wi={idx} style={{ opacity: 0.15 }}>
+                  {word}
+                  {wIdx < words.length - 1 ? " " : ""}
+                </span>
+              ))}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   Activity,
   ArrowRight,
@@ -21,7 +20,10 @@ import {
   Workflow,
   X,
 } from "lucide-react";
+import { GridAnimation } from "@/components/grid-animation";
+import { HeroScanSweep } from "@/components/hero-scan-sweep";
 import { HeroThreadSidebar } from "@/components/hero-thread-sidebar";
+import { ThesisReader } from "@/components/thesis-reader";
 
 const employeeRows = [
   ["waits for queries", "notices work"],
@@ -99,46 +101,51 @@ const competitors = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[var(--surface-bg)] text-[var(--surface-text)]">
-      <header className="sticky top-0 z-30 mx-auto flex h-14 max-w-7xl items-center justify-between border-b border-rule bg-[color-mix(in_srgb,var(--surface-bg)_92%,transparent)] px-5 backdrop-blur">
-        <Image
-          src="/logo-full.png"
-          alt="SSAI"
-          width={80}
-          height={32}
-          priority
-          className="h-8 w-auto"
-          style={{ width: "auto" }}
-        />
-        <nav className="hidden items-center gap-6 text-[13px] font-medium text-text-muted md:flex">
-          <a className="transition-micro hover:text-text-mid" href="#flow">Flow</a>
-          <a className="transition-micro hover:text-text-mid" href="#modes">Modes</a>
-          <a className="transition-micro hover:text-text-mid" href="#not">Not</a>
-          <Link className="transition-micro hover:text-text-mid" href="/thesis">Thesis</Link>
-          <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">Contact</a>
-        </nav>
+    <main className="min-h-screen overflow-x-clip bg-[var(--surface-bg)] text-[var(--surface-text)]">
+      <header className="fixed top-0 left-0 right-0 z-30 pointer-events-none">
+        <div className="mx-auto mt-3 flex h-12 max-w-7xl items-center justify-between rounded border border-rule/20 bg-[color-mix(in_srgb,var(--surface-bg)_25%,transparent)] px-5 backdrop-blur-sm pointer-events-auto">
+          <Image
+            src="/logo-full.png"
+            alt="SSAI"
+            width={80}
+            height={32}
+            priority
+            className="h-8 w-auto"
+            style={{ width: "auto" }}
+          />
+          <nav className="hidden items-center gap-6 text-[13px] font-medium text-text-muted md:flex">
+            <a className="transition-micro hover:text-text-mid" href="#flow">Flow</a>
+            <a className="transition-micro hover:text-text-mid" href="#modes">Modes</a>
+            <a className="transition-micro hover:text-text-mid" href="#not">Not</a>
+            <a className="transition-micro hover:text-text-mid" href="#thesis">Thesis</a>
+            <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">Contact</a>
+          </nav>
+        </div>
       </header>
 
-      <section id="surface" className="technical-grid relative mx-auto grid min-h-[calc(100vh-56px)] max-w-7xl gap-12 px-5 py-16 md:grid-cols-[0.9fr_1.1fr] md:items-center md:py-24">
+      <div id="surface" className="grid-field relative min-h-svh overflow-hidden" style={{ "--grid-size": "21px", "--grid-opacity": "0.06" } as React.CSSProperties}>
+        <GridAnimation gridCell={21} dotSpacing={42} />
+        <HeroScanSweep />
+      <section className="relative mx-auto grid max-w-7xl gap-8 px-5 pt-20 pb-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:pb-10" style={{ minHeight: "inherit" }}>
         <div className="relative z-10">
           <p className="font-mono text-[11px] uppercase tracking-normal text-text-muted">
             Cognitive DevOps engineer
           </p>
-          <h1 className="mt-5 max-w-[680px] font-title text-[clamp(42px,7vw,82px)] leading-[0.98] text-ink">
+          <h1 className="mt-4 max-w-[640px] font-title text-[clamp(42px,6vw,72px)] leading-[0.98] text-ink">
             Teams without DevOps still need DevOps judgment.
           </h1>
-          <p className="mt-6 max-w-[600px] text-[17px] leading-7 text-text-mid">
+          <p className="mt-5 max-w-[580px] text-[16px] leading-7 text-text-mid">
             SSAI self-onboards to your cloud and Kubernetes stack, handles operational work, and leaves an inspectable record of what it did and why.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a className="inline-flex h-9 items-center justify-center rounded-lg bg-ssai-blue px-4 text-[14px] font-medium transition-micro hover:bg-ssai-blue/90" style={{ color: "#fffefc" }} href="mailto:hello@ssai.dev">
-              Book a technical walkthrough
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <a className="inline-flex h-9 items-center justify-center rounded-md bg-ssai-blue px-4 text-[14px] font-medium transition-micro hover:bg-ssai-blue/90 active:scale-[0.97]" style={{ color: "#fffefc" }} href="mailto:hello@ssai.dev">
+              Book demo
             </a>
-            <a className="inline-flex h-9 items-center justify-center rounded-lg border border-rule bg-[var(--surface-bg)] px-4 text-[14px] font-medium text-text transition-micro hover:bg-[var(--surface-hover)]" href="#flow">
-              View product surface
+            <a className="inline-flex h-9 items-center justify-center rounded-md border border-rule bg-[var(--surface-bg)] px-4 text-[14px] font-medium text-text transition-micro hover:bg-[var(--surface-hover)] active:scale-[0.97]" href="#flow">
+              Join waitlist
             </a>
           </div>
-          <div className="mt-10 max-w-[560px] border border-rule bg-[var(--surface-card)]">
+          <div className="mt-8 max-w-[540px] border border-rule bg-[var(--surface-card)]">
             <div className="border-b border-rule px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
               ssai / technical walkthrough
             </div>
@@ -149,8 +156,11 @@ export default function Home() {
           </div>
         </div>
 
-        <HeroThreadSidebar />
+        <div className="relative z-10">
+          <HeroThreadSidebar />
+        </div>
       </section>
+      </div>
 
       <section className="border-y border-rule bg-[var(--surface-card)]">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
@@ -162,10 +172,10 @@ export default function Home() {
             <p className="mt-5 max-w-[560px] text-[17px] leading-7 text-text-mid">
               Tools wait for someone to operate them. SSAI receives work, investigates, replies in your team channels, acts within policy, and leaves a record your team can inspect later.
             </p>
-            <Link href="/thesis" className="mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-ssai-blue transition-micro hover:gap-3">
+            <a href="#thesis" className="mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-ssai-blue transition-micro hover:gap-3">
               Read the thesis behind SSAI
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
           </div>
 
           <div className="border border-rule">
@@ -183,8 +193,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="flow" className="technical-grid mx-auto max-w-7xl px-5 py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section id="flow" className="grid-field relative mx-auto max-w-7xl overflow-hidden px-5 py-24">
+        <GridAnimation gridCell={21} dotSpacing={42} />
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Actual flow</p>
           <h2 className="mt-4 font-title text-[clamp(36px,5vw,66px)] leading-[1.05] text-ink">
             Work starts where your team already is.
@@ -193,7 +204,7 @@ export default function Home() {
             Mention SSAI in Slack, reply from GitHub, continue in the frontend, or let a system trigger open the thread. The channel changes. The work object does not.
           </p>
         </div>
-        <div className="mt-16 grid border border-rule bg-[var(--surface-card)] lg:grid-cols-4">
+        <div className="relative z-10 mt-16 grid border border-rule bg-[var(--surface-card)] lg:grid-cols-4">
           {flowSteps.map((step, index) => {
             const Icon = step.icon;
             return (
@@ -212,7 +223,7 @@ export default function Home() {
             );
           })}
         </div>
-        <div className="mx-auto mt-8 max-w-4xl border border-rule bg-[var(--surface-bg)] px-5 py-4 font-mono text-[13px] text-text-mid">
+        <div className="relative z-10 mx-auto mt-8 max-w-4xl border border-rule bg-[var(--surface-bg)] px-5 py-4 font-mono text-[13px] text-text-mid">
           Slack is a doorway. GitHub is a doorway. The thread is the source of truth.
         </div>
       </section>
@@ -339,8 +350,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="not" className="technical-grid mx-auto max-w-7xl px-5 py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section id="not" className="grid-field relative mx-auto max-w-7xl overflow-hidden px-5 py-24">
+        <GridAnimation gridCell={21} dotSpacing={42} />
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Positioning</p>
           <h2 className="mt-4 font-title text-[clamp(38px,5vw,68px)] leading-[1.05] text-ink">
             What SSAI is not.
@@ -349,7 +361,7 @@ export default function Home() {
             SSAI is built for operational ownership. It is not another surface that hands more work back to the same engineers.
           </p>
         </div>
-        <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="relative z-10 mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {notRows.map(([title, body]) => (
             <div key={title} className="text-center">
               <div className="mx-auto flex h-10 w-10 items-center justify-center text-text-muted">
@@ -394,23 +406,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-24">
-        <div className="grid gap-12 lg:grid-cols-[1fr_0.75fr] lg:items-center">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Thesis</p>
-            <h2 className="max-w-[820px] font-title text-[clamp(38px,6vw,82px)] leading-[0.98] text-ink">
-              The next operational owner will not be another dashboard.
-            </h2>
-          </div>
-          <div>
-            <p className="text-[17px] leading-7 text-text-mid">
-              Read the thesis behind SSAI as a long-form scroll piece. Production operations are moving from dashboards and tribal memory into inspectable agent work.
-            </p>
-            <Link href="/thesis" className="mt-7 inline-flex h-10 items-center justify-center rounded-lg bg-ssai-blue px-4 text-[14px] font-medium transition-micro hover:bg-ssai-blue/90" style={{ color: "#fffefc" }}>
-              Open thesis
-            </Link>
-          </div>
-        </div>
+      <section id="thesis" className="border-t border-rule">
+        <ThesisReader />
       </section>
 
       <footer className="border-t border-rule px-5 py-8">

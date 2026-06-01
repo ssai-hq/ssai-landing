@@ -188,29 +188,54 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.technical-grid {
+.grid-field {
   background-image:
-    linear-gradient(to right, rgba(17, 17, 17, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
-  background-size: 16px 16px;
+    linear-gradient(to right, rgba(17, 17, 17, var(--grid-opacity, 0.045)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, var(--grid-opacity, 0.045)) 1px, transparent 1px);
+  background-size: var(--grid-size, 21px) var(--grid-size, 21px);
 }
 
-.scroll-thesis-line {
-  color: color-mix(in srgb, var(--surface-text-muted) 28%, transparent);
-  transition:
-    color 420ms var(--ease-out-expo),
-    transform 420ms var(--ease-out-expo);
+.hero-scan-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  will-change: opacity, background-position;
 }
 
-.scroll-thesis-line.is-active {
-  color: var(--surface-ink);
-  transform: translateY(-2px);
+.grid-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   Thesis Scroll Section — sticky text with scroll-driven reveal
+   ============================================================ */
+
+.thesis-scroll-line {
+  font-family: var(--font-title);
+  font-size: clamp(22px, 3.1vw, 36px);
+  line-height: 1.22;
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scroll-thesis-line {
-    color: var(--surface-ink);
-    transform: none;
+  .hero-scan-sweep {
+    display: none;
+  }
+
+  .grid-canvas {
+    display: none;
+  }
+
+  .thesis-scroll-line {
+    transition: none;
   }
 }
 
