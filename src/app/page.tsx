@@ -2,59 +2,43 @@ import Image from "next/image";
 import {
   Activity,
   ArrowRight,
+  BarChart3,
   Bell,
   Bot,
   Brain,
   CheckCircle2,
   CircleDollarSign,
   Database,
+  Eye,
+  FileText,
   GitBranch,
-  GitCommitVertical,
   HardDrive,
-  MessageSquare,
+  Layers,
+  MessageCircle,
   MonitorDot,
   Play,
+  RefreshCw,
+  Scale,
   Shield,
   SlidersHorizontal,
-  TerminalSquare,
-  Workflow,
+  User,
   X,
 } from "lucide-react";
 import { GridAnimation } from "@/components/grid-animation";
+import { FlowWalkthrough } from "@/components/flow-walkthrough";
 import { HeroScanSweep } from "@/components/hero-scan-sweep";
 import { HeroThreadSidebar } from "@/components/hero-thread-sidebar";
 import { ThesisReader } from "@/components/thesis-reader";
+import { BlinkingLogo } from "@/components/blinking-logo";
 
-const employeeRows = [
-  ["waits for queries", "notices work"],
-  ["returns data", "gives judgment"],
-  ["needs a human operator", "owns the loop"],
-  ["shows dashboards", "leaves decision records"],
-  ["resets every session", "builds operational memory"],
+const employeeRows: [string, typeof MessageCircle, string, typeof Eye][] = [
+  ["waits for queries", MessageCircle, "notices work", Eye],
+  ["returns data", Database, "gives judgment", Scale],
+  ["needs a human operator", User, "owns the loop", RefreshCw],
+  ["shows dashboards", BarChart3, "leaves decision records", FileText],
+  ["resets every session", RefreshCw, "builds operational memory", Layers],
 ];
 
-const flowSteps = [
-  {
-    label: "Slack",
-    detail: "@ssai checkout deploy is failing again",
-    icon: MessageSquare,
-  },
-  {
-    label: "GitHub",
-    detail: "deployment event and recent diff attached",
-    icon: GitCommitVertical,
-  },
-  {
-    label: "Runner",
-    detail: "logs, health checks, and cloud state collected",
-    icon: TerminalSquare,
-  },
-  {
-    label: "Thread",
-    detail: "one causal record follows the work",
-    icon: Workflow,
-  },
-];
 
 const economicRows = [
   ["Release follow-through", "CTO or backend engineer", "failed deploys stall product work", "investigates, recommends, rolls back, documents"],
@@ -123,10 +107,10 @@ export default function Home() {
         </div>
       </header>
 
-      <div id="surface" className="grid-field relative min-h-svh overflow-hidden" style={{ "--grid-size": "21px", "--grid-opacity": "0.06" } as React.CSSProperties}>
+      <div id="surface" className="grid-field relative min-h-svh overflow-hidden px-5" style={{ "--grid-size": "21px", "--grid-opacity": "0.06" } as React.CSSProperties}>
         <GridAnimation gridCell={21} dotSpacing={42} />
         <HeroScanSweep />
-      <section className="relative mx-auto grid max-w-7xl gap-8 px-5 pt-20 pb-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:pb-10" style={{ minHeight: "inherit" }}>
+      <section className="relative mx-auto grid max-w-7xl gap-8 pt-20 pb-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:pb-10" style={{ minHeight: "inherit" }}>
         <div className="relative z-10">
           <p className="font-mono text-[11px] uppercase tracking-normal text-text-muted">
             Cognitive DevOps engineer
@@ -162,74 +146,83 @@ export default function Home() {
       </section>
       </div>
 
-      <section className="border-y border-rule bg-[var(--surface-card)]">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <section className="border-y border-rule bg-[var(--surface-card)] px-5">
+        <div className="mx-auto grid max-w-7xl gap-10 pt-20 pb-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Category</p>
             <h2 className="mt-4 max-w-[520px] font-title text-[clamp(36px,5vw,68px)] leading-[1.02] text-ink">
-              Not a DevOps tool. A DevOps teammate.
+              Not a DevOps tool. A DevOps <span className="text-ssai-coral">teammate.</span>
             </h2>
             <p className="mt-5 max-w-[560px] text-[17px] leading-7 text-text-mid">
               Tools wait for someone to operate them. SSAI receives work, investigates, replies in your team channels, acts within policy, and leaves a record your team can inspect later.
             </p>
             <a href="#thesis" className="mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-ssai-blue transition-micro hover:gap-3">
-              Read the thesis behind SSAI
+              Read more
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
 
-          <div className="border border-rule">
-            <div className="grid grid-cols-2 border-b border-rule bg-[var(--surface-bg)] font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">
-              <div className="border-r border-rule px-4 py-3">Tool</div>
-              <div className="px-4 py-3 text-ssai-blue">Virtual employee</div>
+          <div className="border border-rule bg-[var(--surface-bg)]">
+            <div className="grid grid-cols-2 border-b border-rule font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
+              <div className="border-r border-rule px-5 py-3 text-center sm:px-6">Typical tool</div>
+              <div className="flex items-center justify-center px-5 py-2 sm:px-6">
+                <BlinkingLogo className="text-[18px]" />
+              </div>
             </div>
-            {employeeRows.map(([tool, employee]) => (
-              <div key={tool} className="grid grid-cols-2 border-b border-rule last:border-b-0">
-                <div className="border-r border-rule px-4 py-5 text-[15px] text-text-muted">{tool}</div>
-                <div className="px-4 py-5 text-[15px] font-medium text-ink">{employee}</div>
+            {employeeRows.map(([toolLabel, ToolIcon, ssaiLabel, SsaiIcon]) => (
+              <div key={toolLabel} className="grid grid-cols-2 border-b border-dashed border-rule/60 last:border-b-0">
+                <div className="flex items-center gap-3 border-r border-dashed border-rule/60 px-5 py-[18px] sm:gap-4 sm:px-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-rule/80 text-text-muted">
+                    <ToolIcon className="h-[18px] w-[18px]" />
+                  </div>
+                  <span className="text-[14px] leading-snug text-text-muted sm:text-[15px]">{toolLabel}</span>
+                </div>
+                <div className="flex items-center gap-3 px-5 py-[18px] sm:gap-4 sm:px-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ssai-blue/25 bg-ssai-blue/[0.05] text-ssai-blue">
+                    <SsaiIcon className="h-[18px] w-[18px]" />
+                  </div>
+                  <span className="text-[14px] font-medium leading-snug text-ink sm:text-[15px]">{ssaiLabel}</span>
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      <section id="flow" className="grid-field relative mx-auto max-w-7xl overflow-hidden px-5 py-24">
-        <GridAnimation gridCell={21} dotSpacing={42} />
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Actual flow</p>
-          <h2 className="mt-4 font-title text-[clamp(36px,5vw,66px)] leading-[1.05] text-ink">
-            Work starts where your team already is.
-          </h2>
-          <p className="mt-5 text-[17px] leading-7 text-text-mid">
-            Mention SSAI in Slack, reply from GitHub, continue in the frontend, or let a system trigger open the thread. The channel changes. The work object does not.
-          </p>
-        </div>
-        <div className="relative z-10 mt-16 grid border border-rule bg-[var(--surface-card)] lg:grid-cols-4">
-          {flowSteps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div key={step.label} className="relative min-h-[260px] border-b border-rule p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0">
-                <div className="flex h-11 w-11 items-center justify-center border border-rule bg-[var(--surface-bg)] text-ssai-blue">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="mt-14 font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
-                  0{index + 1} / {step.label}
-                </div>
-                <p className="mt-3 max-w-[260px] text-[20px] leading-7 text-ink">{step.detail}</p>
-                {index < flowSteps.length - 1 && (
-                  <ArrowRight className="absolute right-6 top-8 hidden h-4 w-4 text-text-muted lg:block" />
-                )}
+        <div className="mx-auto flex max-w-7xl items-start gap-8 pb-20 pt-0 sm:gap-10">
+          {[
+            { icon: Shield, title: "Policy-aware", desc: "Works within guardrails" },
+            { icon: FileText, title: "Always accountable", desc: "Leaves decision records" },
+            { icon: Layers, title: "Always improving", desc: "Builds operational memory" },
+          ].map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="flex items-start gap-2.5">
+              <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-text-muted" />
+              <div>
+                <p className="text-[13px] font-medium leading-tight text-ink">{title}</p>
+                <p className="mt-1 text-[12px] leading-tight text-text-muted">{desc}</p>
               </div>
-            );
-          })}
-        </div>
-        <div className="relative z-10 mx-auto mt-8 max-w-4xl border border-rule bg-[var(--surface-bg)] px-5 py-4 font-mono text-[13px] text-text-mid">
-          Slack is a doorway. GitHub is a doorway. The thread is the source of truth.
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+      <section id="flow" className="grid-field relative overflow-hidden px-5">
+        <GridAnimation gridCell={21} dotSpacing={42} />
+        <div className="relative z-10 mx-auto max-w-7xl py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Actual flow</p>
+            <h2 className="mt-4 font-title text-[clamp(36px,5vw,66px)] leading-[1.05] text-ink">
+              Work starts where your team already is.
+            </h2>
+            <p className="mt-5 text-[17px] leading-7 text-text-mid">
+              Mention SSAI in Slack, reply from GitHub, continue in the frontend, or let a system trigger open the thread. The channel changes. The work object does not.
+            </p>
+          </div>
+          <FlowWalkthrough />
+        </div>
+      </section>
+
+      <section className="px-5 py-20">
+        <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Economics</p>
             <h2 className="mt-4 max-w-[560px] font-title text-[clamp(34px,4vw,58px)] leading-[1.06] text-ink">
@@ -262,8 +255,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="modes" className="border-y border-rule bg-[#262626] text-[#e0ddd6]">
-        <div className="mx-auto max-w-7xl px-5 py-24">
+      <section id="modes" className="border-y border-rule bg-[#262626] text-[#e0ddd6] px-5">
+        <div className="mx-auto max-w-7xl py-24">
           <div className="max-w-3xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#a8a8a0]">Normal / Meta</p>
             <h2 className="mt-4 font-title text-[clamp(36px,5vw,66px)] leading-[1.05] text-[#f5f5f0]">
@@ -298,8 +291,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-24">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <section className="px-5 py-24">
+        <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Memory</p>
             <h2 className="mt-4 font-title text-[clamp(34px,4vw,58px)] leading-[1.06] text-ink">
@@ -325,8 +318,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-rule bg-[var(--surface-card)]">
-        <div className="mx-auto max-w-7xl px-5 py-24">
+      <section className="border-y border-rule bg-[var(--surface-card)] px-5">
+        <div className="mx-auto max-w-7xl py-24">
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Case studies</p>
             <h2 className="mt-4 font-title text-[clamp(34px,4vw,58px)] leading-[1.06] text-ink">
@@ -350,32 +343,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="not" className="grid-field relative mx-auto max-w-7xl overflow-hidden px-5 py-24">
+      <section id="not" className="grid-field relative overflow-hidden px-5">
         <GridAnimation gridCell={21} dotSpacing={42} />
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Positioning</p>
-          <h2 className="mt-4 font-title text-[clamp(38px,5vw,68px)] leading-[1.05] text-ink">
-            What SSAI is not.
-          </h2>
-          <p className="mt-5 text-[17px] leading-7 text-text-mid">
-            SSAI is built for operational ownership. It is not another surface that hands more work back to the same engineers.
-          </p>
-        </div>
-        <div className="relative z-10 mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-          {notRows.map(([title, body]) => (
-            <div key={title} className="text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center text-text-muted">
-                <X className="h-7 w-7" />
+        <div className="relative z-10 mx-auto max-w-7xl py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Positioning</p>
+            <h2 className="mt-4 font-title text-[clamp(38px,5vw,68px)] leading-[1.05] text-ink">
+              What SSAI is not.
+            </h2>
+            <p className="mt-5 text-[17px] leading-7 text-text-mid">
+              SSAI is built for operational ownership. It is not another surface that hands more work back to the same engineers.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+            {notRows.map(([title, body]) => (
+              <div key={title} className="text-center">
+                <div className="mx-auto flex h-10 w-10 items-center justify-center text-text-muted">
+                  <X className="h-7 w-7" />
+                </div>
+                <h3 className="mt-5 font-title text-[24px] italic leading-tight text-ink">{title}</h3>
+                <p className="mx-auto mt-4 max-w-[310px] text-[15px] leading-6 text-text-mid">{body}</p>
               </div>
-              <h3 className="mt-5 font-title text-[24px] italic leading-tight text-ink">{title}</h3>
-              <p className="mx-auto mt-4 max-w-[310px] text-[15px] leading-6 text-text-mid">{body}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="border-y border-rule bg-[var(--surface-card)]">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[0.75fr_1.25fr]">
+      <section className="border-y border-rule bg-[var(--surface-card)] px-5">
+        <div className="mx-auto grid max-w-7xl gap-12 py-20 lg:grid-cols-[0.75fr_1.25fr]">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Category map</p>
             <h2 className="mt-4 font-title text-[clamp(32px,4vw,52px)] leading-[1.08] text-ink">
@@ -410,7 +405,7 @@ export default function Home() {
         <ThesisReader />
       </section>
 
-      <footer className="border-t border-rule px-5 py-8">
+      <footer className="border-t border-rule py-8 px-5">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-[13px] text-text-muted sm:flex-row sm:items-center sm:justify-between">
           <span>SSAI. Cognitive DevOps engineer.</span>
           <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">hello@ssai.dev</a>

@@ -56,8 +56,8 @@ export function ThesisReader() {
       style={{ height: "400vh" }}
       className="relative"
     >
-      <div className="sticky top-0 h-screen flex flex-col justify-center">
-        <div className="mx-auto w-full max-w-[760px] px-8 md:px-12">
+      <div className="sticky top-0 h-screen flex flex-col justify-center px-5">
+        <div className="mx-auto w-full max-w-7xl">
           <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
             Thesis
           </p>
@@ -65,7 +65,7 @@ export function ThesisReader() {
           {wordEntries.map((words, pIdx) => (
             <p
               key={pIdx}
-              className="thesis-scroll-line mb-16 last:mb-0"
+              className="thesis-scroll-line mb-16 max-w-[680px] last:mb-0"
               style={{ color: "var(--surface-ink)" }}
             >
               {words.map(({ word, idx }, wIdx) => (

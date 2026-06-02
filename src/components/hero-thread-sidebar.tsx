@@ -202,9 +202,8 @@ export function HeroThreadSidebar() {
 
   return (
     <div className="relative mx-auto w-full max-w-[590px]">
-      <div className="absolute -left-4 top-9 hidden h-[78%] w-px bg-rule md:block" />
       <div className="grid overflow-hidden rounded-2xl border border-rule bg-[var(--surface-card)] shadow-[var(--shadow-float)] md:grid-cols-[260px_1fr]">
-        <aside className="flex h-[380px] min-w-[260px] flex-col overflow-hidden border-b border-rule bg-[var(--surface-bg,var(--bg-light))] md:h-[500px] md:border-b-0 md:border-r">
+        <aside className="flex h-[380px] min-w-[260px] flex-col overflow-hidden border-b border-rule bg-[var(--surface-bg,var(--bg-light))] md:h-[500px] md:border-b-0">
           <div className="flex items-center justify-between px-3 pb-2 pt-3">
             <span className="text-[13px] font-semibold text-ink">Threads</span>
             <div className="flex items-center gap-1">
