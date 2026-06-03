@@ -102,6 +102,11 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ============================================================
    CSS Custom Properties (non-Tailwind access)
    ============================================================ */
