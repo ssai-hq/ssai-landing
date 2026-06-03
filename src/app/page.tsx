@@ -36,6 +36,7 @@ import { HeroThreadSidebar } from "@/components/hero-thread-sidebar";
 import { ThesisReader } from "@/components/thesis-reader";
 import { BlinkingLogo } from "@/components/blinking-logo";
 import { MobileNav } from "@/components/mobile-nav";
+import { AskSSAI } from "@/components/ask-ssai";
 
 const employeeRows: [string, typeof MessageCircle, string, typeof Eye][] = [
   ["waits for queries", MessageCircle, "notices work", Eye],
@@ -90,6 +91,7 @@ export default function Home() {
             <a className="transition-micro hover:text-text-mid" href="#flow">Flow</a>
             <a className="transition-micro hover:text-text-mid" href="#not">Not</a>
             <a className="transition-micro hover:text-text-mid" href="#thesis">Thesis</a>
+            <a className="transition-micro hover:text-text-mid" href="#ask">Ask</a>
             <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">Contact</a>
           </nav>
           <MobileNav />
@@ -118,15 +120,14 @@ export default function Home() {
               Join waitlist
             </a>
           </div>
-          <div className="mt-8 max-w-[540px] border border-rule bg-[var(--surface-card)]">
-            <div className="border-b border-rule px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
-              ssai / technical walkthrough
-            </div>
-            <div className="flex flex-col gap-2 px-4 py-4 font-mono text-[13px] text-text-mid sm:flex-row sm:items-center sm:justify-between">
-              <span>$ give ssai a staging environment</span>
-              <span className="text-ssai-blue">judge the work</span>
-            </div>
-          </div>
+          <a
+            href="#ask"
+            className="group mt-8 inline-flex items-center gap-2.5 font-mono text-[13px] text-text-muted transition-micro hover:text-ssai-blue"
+          >
+            <span className="text-ssai-blue">Try it</span>
+            <span className="hidden sm:inline">Ask SSAI about your stack</span>
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
+          </a>
         </div>
 
         <div className="relative z-10">
@@ -327,6 +328,12 @@ export default function Home() {
 
       <section id="thesis" className="border-t border-rule">
         <ThesisReader />
+      </section>
+
+      <section id="ask" className="bg-[#0d0d0d]">
+        <div className="mx-auto max-w-7xl px-5 py-24">
+          <AskSSAI />
+        </div>
       </section>
 
       <footer className="border-t border-rule px-5 py-8">
