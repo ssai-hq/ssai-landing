@@ -76,7 +76,7 @@ export default function Home() {
   return (
     <main className="min-h-screen overflow-x-clip bg-[var(--surface-bg)] text-[var(--surface-text)]">
       <header className="fixed top-0 left-0 right-0 z-30 pointer-events-none">
-        <div className="mx-auto mt-3 flex h-12 max-w-7xl items-center justify-between rounded border border-rule/20 bg-[color-mix(in_srgb,var(--surface-bg)_25%,transparent)] px-5 backdrop-blur-sm pointer-events-auto">
+        <div className="mx-auto mt-4 flex h-12 max-w-7xl items-center justify-between rounded border border-rule/20 bg-[color-mix(in_srgb,var(--surface-bg)_25%,transparent)] px-5 backdrop-blur-sm pointer-events-auto md:mt-3 mx-3 md:mx-auto">
           <Image
             src="/logo-full.png"
             alt="SSAI"
