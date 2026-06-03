@@ -2,13 +2,11 @@ import Image from "next/image";
 import {
   ArrowRight,
   BarChart3,
-  Bell,
   BookOpen,
   CircleDollarSign,
   Database,
   Eye,
   FileText,
-  GitBranch,
   KeyRound,
   Layers,
   MessageCircle,
@@ -21,6 +19,7 @@ import {
   Workflow,
   X,
 } from "lucide-react";
+import { ExpandableTable } from "@/components/expandable-table";
 import { GridAnimation } from "@/components/grid-animation";
 import { FlowWalkthrough } from "@/components/flow-walkthrough";
 import { HeroScanSweep } from "@/components/hero-scan-sweep";
@@ -46,31 +45,14 @@ const economicRows: { label: string; icon: typeof Rocket; color: string; bg: str
   { label: "Runbook upkeep", icon: BookOpen, color: "#2d8a4e", bg: "rgba(45,138,78,0.07)", without: "rarely maintained", breaks: "tribal knowledge expands", ssai: "turns operational exhaust into memory" },
 ];
 
-const caseStudies = [
-  {
-    title: "Bad deploy",
-    text: "A deploy starts failing after a schema change. SSAI traces the change, checks service health, proposes the rollback path, and records the decision.",
-    icon: GitBranch,
-  },
-  {
-    title: "Cost surprise",
-    text: "A background worker doubles spend overnight. SSAI identifies the moving service, ties it to the recent release, and opens the follow-up thread.",
-    icon: CircleDollarSign,
-  },
-  {
-    title: "Alert noise",
-    text: "A monitor keeps waking the same engineer. SSAI clusters duplicate alerts, checks impact, and turns the fix into memory.",
-    icon: Bell,
-  },
-];
 
-const notRows = [
-  ["Observability dashboard", "Dashboards expose signals. SSAI turns signals into handled work."],
-  ["Infra chatbot", "Chat is one doorway. The product object is the thread, action record, and memory."],
-  ["DevOps copilot", "Copilots wait beside a human operator. SSAI owns scoped operational loops."],
-  ["Generic infra workspace", "SSAI is not a prettier cloud console. It behaves like a teammate across channels."],
-  ["Traditional managed service", "The product is software-native, inspectable, and continuously improving."],
-  ["Approval theater", "Approvals and vetoes exist where policy requires them. Inspectability comes first."],
+const notRows: { title: string; body: string; logos: string[] }[] = [
+  { title: "Observability dashboard", body: "Dashboards expose signals. SSAI turns signals into handled work.", logos: ["Datadog", "Grafana", "New Relic"] },
+  { title: "Infra chatbot", body: "Chat is one doorway. The product object is the thread, action record, and memory.", logos: ["Kubiya", "Firefly", "Env0"] },
+  { title: "DevOps copilot", body: "Copilots wait beside a human operator. SSAI owns scoped operational loops.", logos: ["Pulumi", "Harness", "LinearB"] },
+  { title: "Generic infra workspace", body: "SSAI is not a prettier cloud console. It behaves like a teammate across channels.", logos: ["AWS Console", "Terraform", "GCP Console"] },
+  { title: "Traditional managed service", body: "The product is software-native, inspectable, and continuously improving.", logos: ["Heroku", "Rackspace", "Platform.sh"] },
+  { title: "Approval theater", body: "Approvals and vetoes exist where policy requires them. Inspectability comes first.", logos: ["ServiceNow", "Jira", "PagerDuty"] },
 ];
 
 const competitors = [
@@ -147,7 +129,7 @@ export default function Home() {
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Category</p>
             <h2 className="mt-4 max-w-[520px] font-title text-[clamp(36px,5vw,68px)] leading-[1.02] text-ink">
-              Not a DevOps tool. A DevOps <span className="text-ssai-coral">teammate.</span>
+              Not a DevOps tool. A DevOps <span className="text-ssai-blue">teammate.</span>
             </h2>
             <p className="mt-5 max-w-[560px] text-[17px] leading-7 text-text-mid">
               Tools wait for someone to operate them. SSAI receives work, investigates, replies in your team channels, acts within policy, and leaves a record your team can inspect later.
@@ -228,65 +210,45 @@ export default function Home() {
               The comparison is not another SaaS seat. It is the operational responsibility currently absorbed by product engineers, founders, and whoever knows the production system best.
             </p>
           </div>
-          <div className="overflow-hidden border border-rule bg-[var(--surface-card)]">
-            <div className="grid grid-cols-[1.1fr_0.95fr_1fr_1.1fr] border-b border-rule bg-[var(--surface-bg)] font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted max-lg:hidden">
-              <div className="px-3 py-3">Responsibility</div>
-              <div className="px-3 py-3">Without DevOps</div>
-              <div className="px-3 py-3">What breaks</div>
-              <div className="px-3 py-3">SSAI ownership</div>
-            </div>
-            {economicRows.map((row) => {
-              const Icon = row.icon;
-              const cells = [row.without, row.breaks, row.ssai];
-              const headers = ["Without DevOps", "What breaks", "SSAI ownership"];
-              return (
-                <div key={row.label} className="grid gap-3 border-b border-rule p-4 last:border-b-0 lg:grid-cols-[1.1fr_0.95fr_1fr_1.1fr] lg:gap-0 lg:p-0">
-                  <div className="text-[13.5px] leading-6 text-text-mid lg:border-r lg:border-rule lg:px-3 lg:py-4">
-                    <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted lg:hidden">Responsibility</span>
-                    <span className="flex items-center gap-2.5 font-medium text-ink">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md" style={{ backgroundColor: row.bg }}>
-                        <Icon className="h-[15px] w-[15px]" style={{ color: row.color }} />
+          <ExpandableTable visibleRows={4}>
+            <div className="overflow-hidden border border-rule bg-[var(--surface-card)]">
+              <div data-econ-header className="grid grid-cols-[1.1fr_0.95fr_1fr_1.1fr] border-b border-rule bg-[var(--surface-bg)] font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted max-lg:hidden">
+                <div className="px-3 py-3">Responsibility</div>
+                <div className="px-3 py-3">Without DevOps</div>
+                <div className="px-3 py-3">What breaks</div>
+                <div className="px-3 py-3">SSAI ownership</div>
+              </div>
+              {economicRows.map((row) => {
+                const Icon = row.icon;
+                const cells = [
+                  { text: row.without, header: "Without DevOps", bold: false },
+                  { text: row.breaks, header: "What breaks", bold: false },
+                  { text: row.ssai, header: "SSAI ownership", bold: true },
+                ];
+                return (
+                  <div key={row.label} data-econ-row className="grid gap-3 border-b border-rule p-4 last:border-b-0 lg:grid-cols-[1.1fr_0.95fr_1fr_1.1fr] lg:gap-0 lg:p-0">
+                    <div className="text-[13.5px] leading-6 text-text-mid lg:border-r lg:border-rule lg:px-3 lg:py-4">
+                      <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted lg:hidden">Responsibility</span>
+                      <span className="flex flex-col items-center gap-1.5 text-center font-medium text-ink">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-md" style={{ backgroundColor: row.bg }}>
+                          <Icon className="h-[15px] w-[15px]" style={{ color: row.color }} />
+                        </span>
+                        {row.label}
                       </span>
-                      {row.label}
-                    </span>
-                  </div>
-                  {cells.map((cell, i) => (
-                    <div key={cell} className="text-[13.5px] leading-6 text-text-mid lg:border-r lg:border-rule lg:px-3 lg:py-4 lg:last:border-r-0">
-                      <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted lg:hidden">
-                        {headers[i]}
-                      </span>
-                      <span className={i === 2 ? "font-medium text-ink" : ""}>{cell}</span>
                     </div>
-                  ))}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-rule bg-[var(--surface-card)]">
-        <div className="mx-auto max-w-7xl px-5 py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Case studies</p>
-            <h2 className="mt-4 font-title text-[clamp(34px,4vw,58px)] leading-[1.06] text-ink">
-              The work looks ordinary. That is the point.
-            </h2>
-          </div>
-          <div className="mt-14 grid border border-rule lg:grid-cols-3">
-            {caseStudies.map((study) => {
-              const Icon = study.icon;
-              return (
-                <article key={study.title} className="min-h-[360px] border-b border-rule p-7 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0">
-                  <div className="flex h-20 items-center justify-center border-b border-rule text-ssai-blue">
-                    <Icon className="h-8 w-8" />
+                    {cells.map((cell, i) => (
+                      <div key={cell.text} className="text-[13.5px] leading-6 text-text-mid lg:border-r lg:border-rule lg:px-3 lg:py-4 lg:last:border-r-0">
+                        <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted lg:hidden">
+                          {cell.header}
+                        </span>
+                        <span className={cell.bold ? "font-medium text-ink" : ""}>{cell.text}</span>
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="mt-8 font-mono text-[12px] uppercase tracking-[0.12em] text-ink">{study.title}</h3>
-                  <p className="mt-5 text-[17px] leading-8 text-text-mid">{study.text}</p>
-                </article>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </ExpandableTable>
         </div>
       </section>
 
@@ -295,20 +257,25 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Positioning</p>
           <h2 className="mt-4 font-title text-[clamp(38px,5vw,68px)] leading-[1.05] text-ink">
-            What SSAI is not.
+            What SSAI is <span className="text-ssai-coral">not.</span>
           </h2>
           <p className="mt-5 text-[17px] leading-7 text-text-mid">
             SSAI is built for operational ownership. It is not another surface that hands more work back to the same engineers.
           </p>
         </div>
         <div className="relative z-10 mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-          {notRows.map(([title, body]) => (
-            <div key={title} className="text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center text-text-muted">
-                <X className="h-7 w-7" />
+          {notRows.map((row) => (
+            <div key={row.title} className="text-center">
+              <div className="mx-auto flex h-8 w-8 items-center justify-center text-text-muted">
+                <X className="h-5 w-5" strokeWidth={2.5} />
               </div>
-              <h3 className="mt-5 font-title text-[24px] italic leading-tight text-ink">{title}</h3>
-              <p className="mx-auto mt-4 max-w-[310px] text-[15px] leading-6 text-text-mid">{body}</p>
+              <div className="mx-auto mt-4 flex flex-wrap items-center justify-center gap-1.5">
+                {row.logos.map((logo) => (
+                  <span key={logo} className="rounded-sm border border-rule bg-[var(--surface-card)] px-2.5 py-1.5 text-[11px] font-medium text-text-muted grayscale">{logo}</span>
+                ))}
+              </div>
+              <h3 className="mt-3 font-title text-[24px] italic leading-tight text-ink">{row.title}</h3>
+              <p className="mx-auto mt-4 max-w-[310px] text-[15px] leading-6 text-text-mid">{row.body}</p>
             </div>
           ))}
         </div>
