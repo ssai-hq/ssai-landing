@@ -35,6 +35,7 @@ import { HeroScanSweep } from "@/components/hero-scan-sweep";
 import { HeroThreadSidebar } from "@/components/hero-thread-sidebar";
 import { ThesisReader } from "@/components/thesis-reader";
 import { BlinkingLogo } from "@/components/blinking-logo";
+import { MobileNav } from "@/components/mobile-nav";
 
 const employeeRows: [string, typeof MessageCircle, string, typeof Eye][] = [
   ["waits for queries", MessageCircle, "notices work", Eye],
@@ -91,6 +92,7 @@ export default function Home() {
             <a className="transition-micro hover:text-text-mid" href="#thesis">Thesis</a>
             <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">Contact</a>
           </nav>
+          <MobileNav />
         </div>
       </header>
 
