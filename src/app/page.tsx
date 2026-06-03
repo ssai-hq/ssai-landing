@@ -19,6 +19,15 @@ import {
   Workflow,
   X,
 } from "lucide-react";
+import {
+  SiDatadog, SiGrafana, SiNewrelic,
+  SiOpenai, SiClaude, SiSlack,
+  SiGithubcopilot, SiGitlab, SiCircleci,
+  SiTerraform, SiGooglecloud, SiVercel,
+  SiHeroku, SiRailway, SiRender,
+  SiJira, SiPagerduty, SiOpsgenie,
+} from "react-icons/si";
+import type { IconType } from "react-icons";
 import { ExpandableTable } from "@/components/expandable-table";
 import { GridAnimation } from "@/components/grid-animation";
 import { FlowWalkthrough } from "@/components/flow-walkthrough";
@@ -46,13 +55,13 @@ const economicRows: { label: string; icon: typeof Rocket; color: string; bg: str
 ];
 
 
-const notRows: { title: string; body: string; logos: string[] }[] = [
-  { title: "Observability dashboard", body: "Dashboards expose signals. SSAI turns signals into handled work.", logos: ["Datadog", "Grafana", "New Relic"] },
-  { title: "Infra chatbot", body: "Chat is one doorway. The product object is the thread, action record, and memory.", logos: ["Kubiya", "Firefly", "Env0"] },
-  { title: "DevOps copilot", body: "Copilots wait beside a human operator. SSAI owns scoped operational loops.", logos: ["Pulumi", "Harness", "LinearB"] },
-  { title: "Generic infra workspace", body: "SSAI is not a prettier cloud console. It behaves like a teammate across channels.", logos: ["AWS Console", "Terraform", "GCP Console"] },
-  { title: "Traditional managed service", body: "The product is software-native, inspectable, and continuously improving.", logos: ["Heroku", "Rackspace", "Platform.sh"] },
-  { title: "Approval theater", body: "Approvals and vetoes exist where policy requires them. Inspectability comes first.", logos: ["ServiceNow", "Jira", "PagerDuty"] },
+const notRows: { title: string; body: string; logos: { name: string; icon: IconType }[] }[] = [
+  { title: "Observability dashboard", body: "Dashboards expose signals. SSAI turns signals into handled work.", logos: [{ name: "Datadog", icon: SiDatadog }, { name: "Grafana", icon: SiGrafana }, { name: "New Relic", icon: SiNewrelic }] },
+  { title: "Infra chatbot", body: "Chat is one doorway. The product object is the thread, action record, and memory.", logos: [{ name: "OpenAI", icon: SiOpenai }, { name: "Claude", icon: SiClaude }, { name: "Slack", icon: SiSlack }] },
+  { title: "DevOps copilot", body: "Copilots wait beside a human operator. SSAI owns scoped operational loops.", logos: [{ name: "GitHub Copilot", icon: SiGithubcopilot }, { name: "GitLab", icon: SiGitlab }, { name: "CircleCI", icon: SiCircleci }] },
+  { title: "Generic infra workspace", body: "SSAI is not a prettier cloud console. It behaves like a teammate across channels.", logos: [{ name: "Terraform", icon: SiTerraform }, { name: "Google Cloud", icon: SiGooglecloud }, { name: "Vercel", icon: SiVercel }] },
+  { title: "Traditional managed service", body: "The product is software-native, inspectable, and continuously improving.", logos: [{ name: "Heroku", icon: SiHeroku }, { name: "Railway", icon: SiRailway }, { name: "Render", icon: SiRender }] },
+  { title: "Approval theater", body: "Approvals and vetoes exist where policy requires them. Inspectability comes first.", logos: [{ name: "Jira", icon: SiJira }, { name: "PagerDuty", icon: SiPagerduty }, { name: "Opsgenie", icon: SiOpsgenie }] },
 ];
 
 const competitors = [
@@ -129,7 +138,7 @@ export default function Home() {
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Category</p>
             <h2 className="mt-4 max-w-[520px] font-title text-[clamp(36px,5vw,68px)] leading-[1.02] text-ink">
-              Not a DevOps tool. A DevOps <span className="text-ssai-blue">teammate.</span>
+              Not a DevOps tool. A DevOps <span className="text-ssai-coral">teammate.</span>
             </h2>
             <p className="mt-5 max-w-[560px] text-[17px] leading-7 text-text-mid">
               Tools wait for someone to operate them. SSAI receives work, investigates, replies in your team channels, acts within policy, and leaves a record your team can inspect later.
@@ -252,7 +261,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="not" className="grid-field relative mx-auto max-w-7xl overflow-hidden px-5 py-24">
+      <section id="not" className="grid-field relative overflow-hidden px-5 py-24">
         <GridAnimation gridCell={21} dotSpacing={42} />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Positioning</p>
@@ -263,15 +272,20 @@ export default function Home() {
             SSAI is built for operational ownership. It is not another surface that hands more work back to the same engineers.
           </p>
         </div>
-        <div className="relative z-10 mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="relative z-10 mx-auto mt-14 grid max-w-7xl gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {notRows.map((row) => (
             <div key={row.title} className="text-center">
               <div className="mx-auto flex h-8 w-8 items-center justify-center text-text-muted">
                 <X className="h-5 w-5" strokeWidth={2.5} />
               </div>
-              <div className="mx-auto mt-4 flex flex-wrap items-center justify-center gap-1.5">
+              <div className="mx-auto mt-4 flex items-center justify-center gap-5">
                 {row.logos.map((logo) => (
-                  <span key={logo} className="rounded-sm border border-rule bg-[var(--surface-card)] px-2.5 py-1.5 text-[11px] font-medium text-text-muted grayscale">{logo}</span>
+                  <span key={logo.name} className="group relative">
+                    <logo.icon className="h-[18px] w-[18px] text-text-muted opacity-40 transition-opacity group-hover:opacity-70" />
+                    <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2 py-1 text-[11px] font-medium text-[var(--surface-bg)] opacity-0 transition-opacity group-hover:opacity-100">
+                      {logo.name}
+                    </span>
+                  </span>
                 ))}
               </div>
               <h3 className="mt-3 font-title text-[24px] italic leading-tight text-ink">{row.title}</h3>
@@ -279,17 +293,13 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="border-y border-rule bg-[var(--surface-card)]">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[0.75fr_1.25fr]">
+        <div className="relative z-10 mx-auto mt-20 grid max-w-7xl gap-12 lg:grid-cols-[0.75fr_1.25fr]">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Category map</p>
-            <h2 className="mt-4 font-title text-[clamp(32px,4vw,52px)] leading-[1.08] text-ink">
+            <h2 className="font-title text-[clamp(32px,4vw,52px)] leading-[1.08] text-ink">
               Familiar logos, different job.
             </h2>
             <p className="mt-5 text-[16px] leading-7 text-text-mid">
-              These categories are useful reference points. SSAI should not sit inside any one of them.
+              These categories are useful reference points. SSAI does not sit inside any one of them, but uses them to do your work.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -305,7 +315,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <div className="border border-ssai-blue bg-[rgba(37,75,241,0.06)] p-4 sm:col-span-2">
+            <div className="border border-ssai-blue bg-[rgba(37,75,241,0.10)] p-4 sm:col-span-2">
               <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-ssai-blue">SSAI</div>
               <div className="mt-4 font-title text-[32px] leading-tight text-ink">Cognitive DevOps engineer</div>
             </div>
