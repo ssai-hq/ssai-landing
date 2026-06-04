@@ -216,7 +216,7 @@ Data posture:
 Visual idea:
 
 A restrained ledger/table, not a flashy savings calculator. The table should feel like an engineering leader's buying model.
-
+  
 ### 5. Normal Mode and Meta Mode
 
 Purpose:
