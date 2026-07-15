@@ -231,57 +231,6 @@ summary:focus-visible {
   transition: transform 180ms var(--ease-out-expo);
 }
 
-.watermelon-site-nav {
-  position: absolute;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  border: 1px solid color-mix(in srgb, var(--hairline) 68%, transparent);
-  border-radius: var(--radius-compact);
-  padding: 3px;
-  background: color-mix(in srgb, var(--surface) 58%, transparent);
-  transform: translateX(-50%);
-}
-
-.watermelon-site-nav a {
-  position: relative;
-  min-height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: var(--radius-control);
-  padding: 0 15px;
-  color: var(--text-mid);
-  font-size: 12px;
-  font-weight: 610;
-  transition: color 150ms var(--ease-out), background-color 150ms var(--ease-out);
-}
-
-.watermelon-site-nav a:hover {
-  background: color-mix(in srgb, var(--surface-blue) 72%, transparent);
-  color: var(--ink);
-}
-
-.watermelon-site-nav a:has(.watermelon-site-nav__active) {
-  color: var(--ssai-blue);
-}
-
-.watermelon-site-nav a > span:last-child {
-  position: relative;
-  z-index: 1;
-}
-
-.watermelon-site-nav__active {
-  position: absolute;
-  inset: 0;
-  border: 1px solid color-mix(in srgb, var(--ssai-blue) 18%, var(--hairline));
-  border-radius: var(--radius-control);
-  background: color-mix(in srgb, var(--surface-blue) 82%, transparent);
-  box-shadow: 0 1px 0 oklch(100% 0 0 / 0.72) inset;
-}
-
 .mobile-nav {
   position: relative;
   display: none;
@@ -3428,8 +3377,7 @@ summary:focus-visible {
 }
 
 @media (max-width: 720px) {
-  .site-nav,
-  .watermelon-site-nav {
+  .site-nav {
     display: none;
   }
 

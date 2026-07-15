@@ -26,7 +26,6 @@ import { BrandLockup } from "@/components/brand-lockup";
 import { MigrationFlightRecorder } from "@/components/migration-flight-recorder";
 import { MobileNav } from "@/components/mobile-nav";
 import { WatermelonProtocol } from "@/components/watermelon-protocol";
-import { WatermelonSiteNav } from "@/components/watermelon-site-nav";
 
 const proofPoints = [
   ["Source", "Read-only by construction"],
@@ -149,7 +148,12 @@ export default function Home() {
             <BrandLockup compact />
             <span className="site-header__descriptor">migration systems</span>
           </a>
-          <WatermelonSiteNav />
+          <nav className="site-nav" aria-label="Primary navigation">
+            <a href="#scope">Scope</a>
+            <a href="#protocol">Protocol</a>
+            <a href="#proof">Proof</a>
+            <a href="#trust">Trust</a>
+          </nav>
           <MobileNav />
           <a
             className="button button--header"

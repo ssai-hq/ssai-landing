@@ -22,17 +22,17 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Watermelon comparison branch
+## Watermelon UI
 
-This worktree runs the `experiment/watermelon-ui-landing` branch. It uses
-[Watermelon UI](https://ui.watermelon.sh/home) as a shadcn-compatible registry
-for selected interactions, then adapts those components to SSAI's typography,
-radius, color, motion, and accessibility rules.
+The landing uses [Watermelon UI](https://ui.watermelon.sh/home) as a
+shadcn-compatible registry for selected interactions, then adapts those
+components to SSAI's typography, radius, color, motion, and accessibility
+rules.
 
-The comparison intentionally uses Watermelon only for the floating navigation,
-migration-act tabs, and canonical phase indicator. Evidence, consent, trust,
-and rollback surfaces remain explicit SSAI ledgers instead of decorative
-component demos.
+Watermelon powers the migration-act tabs and canonical phase indicator. The
+original SSAI floating navbar remains intact because its quieter link treatment
+fits the page better. Evidence, consent, trust, and rollback surfaces remain
+explicit SSAI ledgers instead of decorative component demos.
 
 Registry sources:
 

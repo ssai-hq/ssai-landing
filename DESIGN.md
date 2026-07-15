@@ -525,13 +525,16 @@ The landing page is not:
 - [ ] Illustrative product state is visibly labeled.
 - [ ] An intended visitor can identify the product, agent, corridor, value, safety model, and next action within ten seconds.
 
-## Watermelon UI Comparison Variant
+## Watermelon UI Adoption
 
-The `experiment/watermelon-ui-landing` branch tests Watermelon UI as a
-copy-owned component registry, not as a replacement visual identity.
+The landing uses Watermelon UI as a copy-owned component registry, not as a
+replacement visual identity.
 
-- Continuous Tabs supplies the shared-selection motion for the migration acts
-  and floating desktop navigation.
+- Continuous Tabs supplies the shared-selection motion for the migration acts.
+- The original SSAI floating desktop navbar remains authoritative; Watermelon
+  must not replace its structure or link treatment. The CTA may adopt a
+  Watermelon micro-interaction only when its label, target, and SSAI styling stay
+  unchanged.
 - Step Indicator supplies the interactive canonical phase trajectory.
 - Imported components must use the SSAI radius ladder: 9px controls, 12px
   compact groups, 14px floating surfaces, 16px frames, and 18px instruments.
@@ -543,5 +546,4 @@ copy-owned component registry, not as a replacement visual identity.
 - The registry is allowed only where interaction improves comprehension.
   Evidence rows, safety boundaries, consent, receipts, and rollback remain
   opaque and ledger-like.
-- Promotion beyond the comparison branch requires component-level license and
-  provenance review.
+- Production release requires component-level license and provenance review.
