@@ -1,580 +1,547 @@
----
-name: SSAI Control Plane
-description: Cognitive DevOps control plane — austere, dense, inspectable
-colors:
-  ssai-blue: "#254bf1"
-  ssai-coral: "#FF3C5B"
-  warm-surface: "#fffefc"
-  dark-ground: "#262626"
-  deep-ink: "#111111"
-  body-text: "#222222"
-  secondary-text: "#4d4d4d"
-  quiet-metadata: "#888888"
-  light-ink: "#f5f5f0"
-  dark-body: "#e0ddd6"
-  dark-secondary: "#a8a8a0"
-  dark-metadata: "#6b6b65"
-  warm-hairline: "#d8d4cc"
-  dark-hairline: "#3a3a3a"
-  meta-surface: "#2f2f2f"
-  card-white: "#ffffff"
-  muted-green: "#2d8a4e"
-  muted-amber: "#b45309"
-  restrained-red: "#dc2626"
-  active-hover: "#f8f7f4"
-  hover-ground: "#f5f4f0"
-typography:
-  display:
-    fontFamily: "var(--font-title), Georgia, serif"
-    fontSize: "28px"
-    fontWeight: 400
-    lineHeight: 1.15
-    letterSpacing: "-0.01em"
-  headline:
-    fontFamily: "var(--font-title), Georgia, serif"
-    fontSize: "22px"
-    fontWeight: 400
-    lineHeight: 1.25
-    letterSpacing: "-0.01em"
-  title:
-    fontFamily: "var(--font-title), Georgia, serif"
-    fontSize: "18px"
-    fontWeight: 400
-    lineHeight: 1.3
-    letterSpacing: "0"
-  body:
-    fontFamily: "var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif"
-    fontSize: "15px"
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: "0"
-  label:
-    fontFamily: "var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif"
-    fontSize: "11px"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "0.08em"
-rounded:
-  sm: "4px"
-  md: "8px"
-  lg: "12px"
-  full: "9999px"
-spacing:
-  xs: "4px"
-  sm: "8px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
-  2xl: "48px"
-  3xl: "64px"
-  4xl: "96px"
-components:
-  button-primary:
-    backgroundColor: "{colors.ssai-blue}"
-    textColor: "{colors.card-white}"
-    rounded: "{rounded.md}"
-    padding: "0 16px"
-    height: "36px"
-  button-primary-hover:
-    backgroundColor: "oklch(from #254bf1 calc(l - 0.05) c h)"
-  button-secondary:
-    backgroundColor: "transparent"
-    textColor: "{colors.body-text}"
-    rounded: "{rounded.md}"
-    padding: "0 16px"
-    height: "36px"
-  button-ghost:
-    backgroundColor: "transparent"
-    textColor: "{colors.secondary-text}"
-    rounded: "{rounded.md}"
-    padding: "0 16px"
-    height: "36px"
-  input-default:
-    backgroundColor: "{colors.card-white}"
-    textColor: "{colors.body-text}"
-    rounded: "{rounded.md}"
-    padding: "8px 12px"
-    height: "36px"
-  pill-deploy:
-    backgroundColor: "rgba(37, 75, 241, 0.1)"
-    textColor: "{colors.ssai-blue}"
-    rounded: "{rounded.sm}"
-    padding: "2px 6px"
-  pill-incident:
-    backgroundColor: "rgba(220, 38, 38, 0.1)"
-    textColor: "{colors.restrained-red}"
-    rounded: "{rounded.sm}"
-    padding: "2px 6px"
-  pill-warning:
-    backgroundColor: "rgba(180, 83, 9, 0.1)"
-    textColor: "{colors.muted-amber}"
-    rounded: "{rounded.sm}"
-    padding: "2px 6px"
-  badge-healthy:
-    backgroundColor: "rgba(45, 138, 78, 0.08)"
-    textColor: "{colors.muted-green}"
-    rounded: "{rounded.sm}"
-    padding: "2px 8px"
-  badge-danger:
-    backgroundColor: "rgba(220, 38, 38, 0.08)"
-    textColor: "{colors.restrained-red}"
-    rounded: "{rounded.sm}"
-    padding: "2px 8px"
----
+# SSAI Landing Design System
 
-# Design System: SSAI Control Plane
+## Register
 
-## 1. Overview
+landing / marketing
 
-**Creative North Star: "The Developer Control Plane"**
+## Status and Authority
 
-A dense, inspectable surface where competent people verify autonomous operations calmly. Not a bunker, not a war room, not a monitoring center with walls of red alerts. A workspace where information is dense when you look for it and quiet when you don't. Where the typography is precise because the decisions are consequential. Where the single blue accent on a warm product surface anchors attention without competing for it.
+This is the design authority for the public SSAI landing page. It translates the current Jumpship migration-pivot packet into a marketing surface. Product-state behavior, security guarantees, and implementation contracts remain authoritative in the current MVP implementation packet.
 
-The SSAI control plane is an austere product interface. It borrows its density from developer tooling (serif display face marks hierarchy; sans-serif carries the work) and its restraint from professional instruments (status is proportional; nothing screams unless something is actually wrong). The system exists so operators can verify their AI colleague is competent, not so they can drive it. Every surface, every component, every transition serves that verification with minimal friction.
+The landing page may borrow the product's migration flight-recorder grammar, but it is not the authenticated product UI and must not pretend that decorative sample data is live customer state.
 
-This system explicitly rejects: generic shadcn admin panels with no design opinion; Datadog-style metric-dense dashboards; terminal/cyberpunk aesthetics; chatbot UIs with decorative charts bolted on; Devin-style AI agent theater where dark themes and flashy autonomy demos substitute spectacle for substance; PagerDuty-style alert-centric tools that feel like monitoring software rather than a colleague's workspace.
+## Creative North Star
 
-**Key Characteristics:**
-- Warm product surface (`#fffefc`) as the universal ground. Never cold white, never gray.
-- Serif display face (Tiempos Text) reserved for product hierarchy: page titles, thread titles, action gates, empty states. Never in navigation, buttons, or metadata.
-- Precise and quiet interaction: subtle state changes, minimal decoration. Components communicate through restraint.
-- Dual-mode architecture (Normal/Meta) that shifts the color environment without changing the spatial layout or component grammar.
-- Status communicated through small proportional indicators (6px dots, tinted pills at 8% opacity), never through large color fills or traffic-light dashboards.
-- One blue accent (`#254bf1`) that carries all primary interaction. One coral flourish (`#FF3C5B`) permitted once per screen at most.
-- Deliberate shadow layers (inset → layer-1 → layer-2 → layer-3) for structural depth. Hairline borders remain the default; shadows earn their place through tier assignment.
+**A migration flight recorder in public view.**
 
-## 2. Colors: The Control Plane Palette
+The page should feel like a precise record of a consequential system change: sharp enough for a technical buyer, dense enough to demonstrate substance, and calm enough to communicate control.
 
-A restrained palette of tinted warm neutrals with one committed blue accent. The color strategy is Restrained: the warm product surface and deep ink do the heavy lifting; SSAI Blue appears on less than 10% of any given screen; its rarity is the point.
+The visual direction is warm-light, editorial, and instrument-like:
 
-### Primary
+- a warm off-white ground;
+- strong serif hierarchy;
+- compact sans-serif explanation;
+- monospaced provenance used sparingly;
+- hairlines, ledgers, phase rails, evidence rows, and version chips;
+- one clear corridor moving from source understanding to verified target;
+- no decorative dashboard mosaic and no generic AI spectacle.
 
-- **SSAI Blue** (`#254bf1`): The single operational accent. Active states, primary buttons, selected thread indicators, composer submit, links, focus rings. A deep saturated blue that reads as authoritative against the warm product surface, not decorative. In Meta Mode, the same blue becomes more prominent against the dark ground.
+Density comes from grouping related facts, reducing repetition, and using structured rows. It does not come from shrinking type, stacking cards, or filling the page with badges.
 
-### Secondary
+## Brand Architecture
 
-- **SSAI Coral** (`#FF3C5B`): A reserved flourish, not a functional color. Appears exclusively in the wordmark's "ai" characters, one critical-action badge per screen (when an action gate demands immediate attention), and the final 30 seconds of a countdown bar. Never in buttons, navigation, status indicators, or background fills. Never more than once per visible screen.
+- **SSAI** is the product.
+- **Jumpship** is SSAI's database-migration agent.
+- The wordmark may render as lowercase **ssai**.
+- Product prose uses **SSAI** and **Jumpship**.
+- The visible launch corridor is **MongoDB Atlas → Supabase/PostgreSQL**.
+- No other source or target logo may imply an available corridor.
 
-### Neutral
+The first viewport must make the product, agent, corridor, value, and primary action legible without scrolling.
 
-- **Warm Surface** (`#fffefc`): The ground surface in Normal Mode. Every zone's default background. Warmer than white; the slight yellow tint prevents clinical coldness.
-- **Card White** (`#ffffff`): The composer and elevated card surfaces. Marginally brighter than Warm Surface to create a gentle lift without shadow.
-- **Deep Ink** (`#111111`): Page titles and thread titles only. The heaviest text weight in the system.
-- **Body Text** (`#222222`): All body copy, thread messages, descriptions. The workhorse reading color.
-- **Secondary Text** (`#4d4d4d`): Descriptions, supporting copy, expandable section labels. Subordinate to Body Text.
-- **Quiet Metadata** (`#888888`): Timestamps, monospaced metadata, channel indicators. Background information that's available but not competing.
-- **Warm Hairline** (`#d8d4cc`): All borders and dividers in Normal Mode. A tinted warm gray that disappears into the product surface. Never a stark gray.
-- **Dark Ground** (`#262626`): The ground surface in Meta Mode. Not pure black; warm enough to feel intentional.
-- **Meta Surface** (`#2f2f2f`): Card and panel backgrounds in Meta Mode. One step lighter than Dark Ground.
-- **Dark Hairline** (`#3a3a3a`): Borders and dividers in Meta Mode.
-- **Light Ink** (`#f5f5f0`) / **Dark Body** (`#e0ddd6`) / **Dark Secondary** (`#a8a8a0`) / **Dark Metadata** (`#6b6b65`): The Meta Mode text hierarchy, mirroring the Normal Mode text scale.
+## Visual Principles
 
-### Semantic Status
+### 1. Warm precision
 
-- **Muted Green** (`#2d8a4e`): Healthy, completed, resolved. Used as 6px dots or 8%-opacity tinted pills.
-- **Muted Amber** (`#b45309`): Warning, pending, degraded. Same indicator patterns.
-- **Restrained Red** (`#dc2626`): Danger, failing, destructive. Same indicator patterns. Not coral; coral is brand, not status.
+Warm light is the default environment. Deep ink, restrained neutrals, and hairline structure carry most of the interface. Bright color is scarce and therefore meaningful.
 
-### Named Rules
+### 2. Evidence before decoration
 
-**The Coral Discipline Rule.** Coral appears at most once per visible screen. Its permitted locations: the wordmark "ai", one critical action badge, the countdown bar's final 30 seconds. Everything else is forbidden. Coral's rarity is its power.
+The main visual object should communicate how Jumpship understands, designs, migrates, verifies, or preserves rollback. Illustrations that cannot teach one of those ideas do not belong.
 
-**The Status Proportion Rule.** Status colors appear only as small indicators: 6px dots, tinted pills at 8% opacity, and 2px accent borders. Status colors never fill large areas, never become button colors, and never dominate a surface. Color is never the sole indicator; always pair with text or icon.
+### 3. One causal trajectory
 
-**The Four Constants Rule.** Four values are immutable across all design iterations: SSAI Blue (`#254bf1`), SSAI Coral (`#FF3C5B`), Tiempos Text (title font), Geist (body font). Every other token (neutrals, status colors, spacing, shadows, radii, motion) can evolve. These four cannot.
+The page reads as one journey:
 
-**The No Pure Black Rule.** `#000000` never appears. The darkest value is `#111111` for Deep Ink headlines. The dark mode ground is `#262626`. Every neutral is tinted warm.
+**discover → design → rehearse → load → sync → verify → cut over → roll back/watch → decommission**
 
-## 3. Typography
+Sections may deepen the story, but they must not fragment the product into an unrelated grid of features.
 
-**Display Font:** Tiempos Text (with Georgia fallback)
-**Body Font:** Geist (with system sans-serif fallback)
-**Label/Mono Font:** Geist Mono (with JetBrains Mono, ui-monospace fallback)
+### 4. Tiempos hierarchy, product density
 
-**Character:** Tiempos Text serves as the display face for product hierarchy: it signals that a moment matters (a page title, a decision gate, an empty state worth reading) without pulling the interface into magazine territory. Geist does the work everywhere else; clean, variable-weight, contemporary. Geist Mono is a system signal: timestamps, environment labels, run IDs. It is texture, not design.
+Tiempos Text gives consequential headings authority and pace. Geist carries the explanation. Geist Mono marks machine facts. The composition stays warm and instrument-like while the proof surfaces remain compact and product-like.
 
-### Hierarchy
+### 5. Honest consequence
 
-- **Display** (400, 28px, line-height 1.15, tracking -0.01em): Page titles on `/tasks`, `/ops`, `/audit`, `/settings`. The largest text in the system. Tiempos Text.
-- **Headline** (400, 22px, line-height 1.25, tracking -0.01em): Thread titles in the center view, Infra Health summary, empty state titles. Tiempos Text.
-- **Title** (400, 18px, line-height 1.3): Action gate headings. The decision-critical typography tier. Tiempos Text.
-- **Section** (600, 14px, line-height 1.4): Sidebar section headings, widget headings, table headers. Geist.
-- **Body** (400, 15px, line-height 1.5): Thread messages, descriptions, all reading text. Maximum line length 65-75ch. Geist.
-- **Composer** (400, 16px, line-height 1.5): The main input. Slightly larger than body for tactile prominence. Geist.
-- **Label** (700 or Mono 500, 11px, line-height 1.2, tracking 0.08em, uppercase): Eyebrow zone labels like "NEEDS YOU", "INFRA HEALTH", "RECENT". Geist Bold or Geist Mono Medium.
-- **Metadata** (Mono 400, 12px, line-height 1.3): Timestamps, environment tags, run IDs, channel indicators. Always in Quiet Metadata (`#888888`) or Secondary Text (`#4d4d4d`). Geist Mono.
-- **Pill** (600, 11px, tracking 0.02em, uppercase): Thread label pills. Geist.
+Every claim about action should show a boundary, basis, or reversal path nearby. The page never hides the hard parts of cutover behind a cheerful “continue.”
 
-### Named Rules
+## Color System
 
-**The Tiempos Reservation Rule.** Tiempos Text appears in exactly six contexts: page titles, thread titles (center view), action gate headings, report/artifact titles, empty states, and the Infra Health summary headline. It never appears in navigation labels, button text, form labels, table headers, sidebar thread rows, or timestamps. If you are about to set Tiempos on something not in the list, use Geist instead.
+### Core palette
 
-**The Mono-as-Signal Rule.** Geist Mono is a system signal, not a design element. It communicates machine-generated or machine-readable information: timestamps, environment labels, run IDs, source metadata. Mono text is always colored as Quiet Metadata or Secondary Text. It never carries primary meaning.
+| Token | Value | Use |
+|---|---:|---|
+| Ground | #fffdf8 | Universal page ground |
+| Surface | #ffffff | Raised or focused content surface |
+| Surface subtle | #f7f4ec | Alternate bands and quiet instruments |
+| Ink | #171715 | Headlines and strongest labels |
+| Text | #2b2a27 | Body and primary explanatory copy |
+| Text muted | #6f6c63 | Secondary copy and quiet labels |
+| Hairline | #ddd8cc | Dividers, rails, table rules |
+| SSAI Blue | #254bf1 | Primary action, navigation, focus, current phase |
+| SSAI Blue hover | #1e3fcf | Primary hover state |
+| SSAI Coral | #FF3C5B | Rare brand flourish only |
+| Success | #2f7d4a | Verified or complete status |
+| Warning | #a86416 | Waiting, degraded, or attention state |
+| Danger | #b93b3b | Failed, blocked, or destructive state |
+| Focus dark ground | #20201e | Product cutover reference only |
+| Focus dark surface | #292927 | Product cutover reference only |
 
-## 4. Elevation
+### Color rules
 
-The system is layered through deliberate shadow tiers. Hairline borders (`1px Warm Hairline`) and tonal layering (Card White lifted slightly above Warm Surface) remain the default depth mechanism for most content. Shadows are additive — they earn their place by mapping to a structural tier, not by decoration.
+- SSAI Blue is the only primary interaction color.
+- SSAI Coral is preserved as a brand constant but appears at most once in a visible viewport.
+- Coral is never a danger, consent, warning, or status color.
+- Green, amber, and red appear as small dots, text, two-pixel rules, or low-tint labels paired with words.
+- Hairlines and tonal changes establish structure before shadows.
+- Pure black is not used.
+- Low-chroma blue and coral refraction may sit behind the hero glass. Gradient text, purple haze, and rainbow AI treatments are not used.
+- The landing page remains warm-light. It does not add a decorative global dark mode.
 
-### Shadow Vocabulary
+## Typography
 
-- **Inset** (`inset 0 1px 2px rgba(0,0,0,0.06)`): Internal depth for recessed surfaces — input fields, wells, toggle tracks. Communicates "below the page plane."
-- **Layer 1** (`0 1px 2px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04)`): The lightest raised surface. Composer at rest, cards that need subtle lift above the ground.
-- **Layer 2** (`0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03)`): Mid-elevation. Popovers, dropdown menus, expanded panels.
-- **Layer 3** (`0 4px 16px rgba(0,0,0,0.12)`): The highest elevation. Command palette, modal dialogs, notification overlays.
-- **Surface** (`0 1px 3px rgba(0,0,0,0.04)`): Legacy token. Equivalent to Layer 1 use cases. Retained for backward compatibility.
-- **Overlay** (`0 4px 16px rgba(0,0,0,0.08)`): Legacy token. Equivalent to Layer 3 use cases. Retained for backward compatibility.
-- **Float** (`0 0 0 0.5px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03)`): Borderless floating surfaces. A 0.5px spread shadow acts as a faux hairline, two blur layers add soft depth. Used by the `<Surface>` primitive for dropdowns, popovers, the composer, and any container that should feel gently lifted without a hard border. In Meta Mode, the hairline inverts to white at low opacity and blur opacities increase.
-- **Float Active** (`0 0 0 0.5px rgba(0,0,0,0.1), 0 2px 12px rgba(0,0,0,0.06), 0 6px 24px rgba(0,0,0,0.04)`): Intensified float shadow for focus-within states. The hairline darkens and blur radii expand, creating a subtle "lift" when the user focuses an input inside the surface.
-- **Focus** (`0 0 0 2px rgba(37,75,241,0.25)`): The focus ring. Applied on `:focus-visible` alongside a `2px solid SSAI Blue` outline. Structural: communicates keyboard navigation, not decoration.
+All fonts are self-hosted through Next font tooling. Production makes no runtime request to a font CDN.
 
-### Named Rules
+### Families
 
-**The Layer Tier Rule.** Every shadow maps to a structural tier: inset (recessed), layer-1 (raised), layer-2 (floating), layer-3 (overlaid). A component's shadow communicates its z-position in the interface stack. Shadows never appear for decoration — only to establish spatial relationships between surfaces.
+- **Tiempos Text Regular** — display hierarchy and consequential narrative turns.
+- **Geist Sans** — body, navigation, controls, and explanatory copy.
+- **Geist Mono** — provenance, timestamps, versions, hashes, counts, rates, and migration metadata only.
 
-**The One Shadow Rule.** Never more than one shadow depth per component. If a card already has a hairline border, it does not also get a shadow. If an overlay has the Layer 3 shadow, it does not stack a Layer 1 shadow inside it. Choose one mechanism per element.
+Tiempos is loaded from the repository-local WOFF2 through `next/font/local`. Mono is a system signal, not a theme.
 
-**The Hairline-First Rule.** The default depth mechanism is a `1px Warm Hairline` border. Shadow layers are legitimate depth tools, but hairlines remain the first instinct. If a component can communicate its depth through a border alone, prefer that. Reserve shadows for elements that structurally float above their surroundings.
+### Landing type scale
 
-**The Internal Density Rule.** 4px increments govern spacing inside components (padding between label and value, gap between icon and text, internal margins). The 8px page grid governs spacing between components. This dual scale allows dense, inspectable component interiors without cramping the overall layout rhythm.
+| Tier | Desktop | Narrow | Family and use |
+|---|---:|---:|---|
+| Hero | 64/60 | 46/43 | Tiempos 400; one H1 only |
+| Section display | 42/44 | 35/36 | Tiempos 400; major narrative turn |
+| Headline | 28/32 | 24/28 | Tiempos 400; proof-surface heading |
+| Title | 20/25 | 19/24 | Tiempos 400 or Geist 600 |
+| Body lead | 18/29 | 17/27 | Geist 400; hero and section introduction |
+| Body | 15/24 | 15/23 | Geist 400; standard reading text |
+| Control | 14/20 | 15/20 | Geist 550; buttons and navigation |
+| Label | 11/14 | 11/14 | Geist 650; uppercase, 0.07em tracking |
+| Metadata | 12/16 | 12/16 | Geist Mono 450; machine facts only |
 
-## 5. Components
+### Typography rules
 
-### Buttons
+- Body copy is capped at roughly 68-72 characters per line.
+- The hero headline stays within three lines on a 1280px viewport and four on a narrow phone.
+- Tiempos does not appear in buttons, pills, table headers, or metadata.
+- Geist Mono never carries the main value proposition.
+- Reading text never drops below 11px. A scaled, non-interactive illustrative instrument may use 8-10px metadata when its full meaning remains available in adjacent text and accessible labels.
+- Emphasis comes from hierarchy, weight, and spacing, not gradient text or excessive bolding.
 
-Precise and quiet. State changes are subtle color shifts, not dramatic transformations. Every button uses Geist 500 at 14px.
+## Grid and Rhythm
 
-- **Shape:** Gently curved edges (8px radius). Height 36px standard, 32px compact.
-- **Primary:** SSAI Blue fill, white text, 16px horizontal padding. One per visible section. Used for Submit, Confirm, Create.
-- **Hover / Focus:** Primary darkens ~8% on hover. Focus adds the Focus ring (`0 0 0 2px` SSAI Blue at 25% opacity). Transition: 150ms ease-out.
-- **Secondary:** Transparent fill, `1px Warm Hairline` border, Body Text color. Used for Veto, Cancel, secondary actions. Hover fills with Warm Surface.
-- **Ghost:** No border, Secondary Text color. Tertiary actions, expand/collapse, view more. Hover adds a subtle underline.
+### Page frame
 
-No coral buttons. No gradient buttons. No icon-only buttons without a tooltip.
+- Maximum content width: 1440px.
+- Desktop grid: 12 columns.
+- Desktop gutters: 32-40px.
+- Narrow gutters: 20px.
+- Page rhythm: 8px.
+- Dense internal rhythm: 4px.
+- Standard section separation: 88-112px, tightened when a hairline or shared background keeps the narrative connected.
 
-**Cursor:** Every interactive element — buttons, links, tabs, menu items, selects, toggles — must show `cursor: pointer` on hover. This is enforced globally in `globals.css` via a base rule on `button`, `a`, `[role="button"]`, `[role="link"]`, `[role="tab"]`, `[role="menuitem"]`, `select`, `summary`, and `label[for]`. Disabled elements inherit `pointer-events: none` which prevents the pointer from appearing.
+### Density rules
 
-### Chips / Pills
+- Prefer one large composition over a collection of equal cards.
+- Use hairline rows, split columns, and aligned metadata to compress information.
+- Keep related proof and explanation adjacent.
+- Avoid ornamental whitespace that pushes the corridor or value proposition below the fold.
+- Avoid cards nested inside cards. Use indentation, section rules, and background tone instead.
 
-Two distinct uses: scope chips (interactive, removable) and label pills (read-only classification).
+## Landing Information Architecture
 
-- **Scope Chip:** Geist 500, 12px. Warm Surface background, `1px Warm Hairline` border, 4px radius. Remove button (x) appears on hover. Animate in with 200ms ease-out.
-- **Label Pill:** Geist 600, 11px, uppercase, 0.02em tracking, 4px radius. Category-tinted background at 10% opacity with full-color text. Deploy/CI-CD/Infra = blue tint; Incident/Security = red tint; Alert/Cost = amber tint; Simulation = Secondary Text tint.
-- **Status Badge:** Geist 600, 11px, 4px radius. Same 8% opacity tinting pattern as pills, mapped to semantic status colors.
+### 1. Header
 
-### Cards / Containers
+A compact floating glass header with:
 
-Cards are used sparingly. Most content sits directly on the Ground surface, structured by typography and hairlines.
+- the canonical SSAI logo from `public/logo-full.png`;
+- links to Scope, Protocol, Proof, and Trust;
+- one primary CTA: **Migration review**;
+- a compact mobile menu preserving all four anchors.
 
-- **Corner Style:** Gently rounded (12px radius) for major containers (panels, overlays, composer). Standard (8px) for inline cards like the Action Gate.
-- **Background:** Card White (`#ffffff`) in Normal Mode; Meta Surface (`#2f2f2f`) in Meta Mode.
-- **Shadow Strategy:** Hairline-First. Cards use `1px Warm Hairline` border. Only the composer and overlays use box shadows.
-- **Internal Padding:** 24px for major containers (Action Gate, notification panel). 16px for compact containers.
-- **No nested cards.** If content needs depth inside a card, use indentation and hairlines. Cards never stack.
+Glass is purposeful here because navigation is a persistent layer above changing content. Match the established SSAI clear-glass recipe: a 25 percent warm-surface tint, a faint 20 percent hairline border, 4px backdrop blur, no pronounced glass shadow or saturation boost, and a solid fallback. Keep the 16px frame radius. The header must remain quiet enough to avoid becoming a product navigation replica.
 
-### Surface (Primitive)
+### 2. Hero
 
-A shared container primitive (`<Surface>`) for any floating or elevated panel: dropdowns, popovers, modals, the composer. Replaces ad-hoc `bg-[var(--surface-card)]` + inline shadow strings with a single component backed by design tokens.
+Desktop composition: seven columns of proposition and five columns of proof.
 
-- **Import:** `import { Surface } from "@/components/primitives"`
-- **Background:** `var(--surface-card)` (mode-adaptive: Card White in Normal, Meta Surface in Meta).
-- **Elevation variants:**
-  - `layer-1`: Layer 1 shadow. Subtle raised cards.
-  - `float` (default): Float shadow — 0.5px faux hairline + three-layer soft depth. The standard for dropdowns, popovers, composer.
-  - `layer-2`: Layer 2 shadow. Expanded panels.
-  - `overlay`: Layer 3 shadow. Modals, command palette.
-- **Radius variants:** `md` (8px), `lg` (12px, default), `xl` (16px).
-- **Focusable:** When `focusable` is true, adds `transition-shadow duration-200` and a `focus-within:` state that intensifies the shadow to its active counterpart (e.g. float → float-active).
-- **Usage:**
-  - Composer: `<Surface elevation="float" radius="xl" focusable>`
-  - Dropdown: `<Surface elevation="float" radius="md">`
-  - Popover: `<Surface elevation="float" radius="lg">`
-  - Modal: `<Surface elevation="overlay" radius="lg">`
+The proposition contains:
 
-### Inputs / Fields
+- eyebrow: **Database migrations, fully accounted for**;
+- H1: **MongoDB to PostgreSQL, without the leap of faith.**;
+- one short explanation naming SSAI and Jumpship;
+- primary and secondary CTAs;
+- a compact trust line: read-only source, isolated migration cell, verified cutover, rollback window.
 
-- **Style:** Card White background, `1px Warm Hairline` border, 8px radius, 36px height. Text in Body Text color; placeholder in Quiet Metadata.
-- **Focus:** Border shifts to SSAI Blue at 50% opacity. Focus shadow ring (`0 0 0 2px rgba(37,75,241,0.08)`). Transition: 150ms ease-out.
-- **Disabled:** 50% opacity, not-allowed cursor.
+The proof object is a landing-specific migration instrument, not a fake chat window. It should show a compact example of:
 
-### Navigation
+- source evidence discovered;
+- target-model decision;
+- current phase;
+- verification or rollback state;
+- evidence/version identifiers.
 
-- **Top Nav:** 56px height, Warm Surface background, `1px Warm Hairline` bottom border. Logo left-aligned, mode toggle centered, notifications and profile right-aligned. No shadows, no gradient.
-- **Left Sidebar:** Warm Surface background, `1px Warm Hairline` right border. Thread rows: 52-64px height, hover at `#f5f4f0` (150ms), active state marked by `2px SSAI Blue` left border and warm background (`#f8f7f4`).
-- **Right Sidebar:** Warm Surface background, `1px Warm Hairline` left border. Collapsible to 0. Infra Health widget as the anchor.
+Any sample state is labeled **Illustrative migration**.
 
-### Connection Indicator
+### 3. Corridor strip
 
-Live-status dot in the top nav, left of the Normal/Meta toggle. Shows aggregate health of all external channel integrations.
+A full-width hairline band directly after the hero:
 
-- **Trigger:** 24×24px hit area, 10px (`h-2.5 w-2.5`) status dot centered inside. No border, no container. Hover tints the circle background to a lighter shade of the dot's own status color (not grey). No focus outline.
-- **Dot color:** Reflects worst channel health — Muted Green if all connected, Muted Amber if any degraded, Restrained Red if any disconnected. Glow animation when all healthy.
-- **Dropdown:** Centered on trigger (`align="center"`), Layer 2 shadow. No hairline separators. Two-column grid (`grid-cols-2 gap-1.5`).
-- **Each row:** Colored brand logo (Iconify `logos` set, pre-colored SVGs), channel name in Geist 13px, tinted status pill on the right. Rows are hoverable with `hover:bg-[var(--surface-hover)]`, `cursor: pointer`, 150ms transition.
-- **Status pills:** Geist Mono 10px, 4px radius, tinted background + darker text. Connected: `#d4edda` / `#1a6b35`. Degraded: `#fff3cd` / `#8a5a00`. Offline: `#f8d7da` / `#92200e`.
+**MongoDB Atlas** → discovery and design → deterministic migration → **Supabase/PostgreSQL**
 
-### Action Gate (Cooldown Veto)
+Supporting labels can name GitHub context, CDC, verification, and rollback. The strip must not include unrelated database logos.
 
-The most decision-critical component. Inline in the thread conversation at Layer 1 depth.
+### 4. Why copying fails
 
-- **Container:** `1px Warm Hairline` border, 12px radius, 24px padding.
-- **Heading:** Tiempos Text 400, 18px, Deep Ink. This is a decision gate.
-- **Countdown Bar:** 4px height, SSAI Blue fill against Warm Hairline track, full radius. Linear animation (precision, not drama). Last 30 seconds: fill transitions to SSAI Coral over 10 seconds.
-- **Countdown Text:** Geist Mono 500, 14px, Body Text.
-- **Buttons:** Veto (Secondary), Confirm (Primary). Positioned at opposite ends.
+Show the problem as a dense comparison between document reality and relational responsibility:
 
-### Composer
+- field drift → explicit type policy;
+- embedded ownership → tables, foreign keys, or intentional JSONB;
+- app-enforced references → constraints and identity translation;
+- multiple writers → writer inventory and cutover choreography;
+- live changes → CDC, reconciliation, and headroom;
+- “looks loaded” → canonical and query-semantic verification.
 
-The primary interaction point. It should feel like handing work to a colleague, not filling a form.
+This section should feel like an annotated ledger, not six floating benefit cards.
 
-- **Container:** Card White background, `1px Warm Hairline` border, 8px radius, subtle Surface shadow. Focus: border shifts to SSAI Blue at 50%.
-- **Input:** Geist 400, 16px (slightly larger than body). Placeholder: "What needs handling?" in Quiet Metadata.
-- **Submit:** 32px circular SSAI Blue button, positioned inside the input field. Disabled state: Warm Hairline background, Quiet Metadata icon.
+### 5. One migration trajectory
 
-### Empty States
+Use a phase rail or table with the complete path:
 
-Typography is the design. No illustrations, no icons.
+1. Connect
+2. Discover
+3. Foundation
+4. Snapshot and census
+5. Design and decide
+6. Rehearse and quarantine
+7. Load and CDC
+8. Verify
+9. Cut over
+10. Roll back or watch
+11. Decommission
 
-- **Title:** Tiempos Text 400, 22px, Deep Ink. Centered.
-- **Body:** Geist 400, 15px, Secondary Text. Centered, 96px top padding.
+Each phase gets one sentence describing its output and one compact evidence artifact. The rail is causal; it is not arbitrary navigation.
 
-## 6. Icons
+### 6. What moves
 
-Icons are functional signals, not decoration. They orient the eye and compress meaning into a small space. Every icon earns its place by doing something a word alone cannot do faster.
+Present the work inside this corridor:
 
-### Sizing
+- document shapes and BSON types;
+- embedded records and arrays;
+- identifiers and references;
+- history and lifecycle;
+- constraints and indexes;
+- bulk data;
+- live writes through change streams;
+- query semantics and integrity evidence;
+- reverse-sync and rollback state.
 
-- **Default:** 18×18px (`h-[18px] w-[18px]` / `size-[18px]`). The workhorse size for inline actions, sidebar items, navigation, and metadata rows.
-- **Compact:** 16×16px. Only inside dense tables, pills, or very tight toolbar groups where 18px creates crowding.
-- **Prominent:** 20×20px. Top-nav actions (notifications, profile), standalone icon buttons, and any icon that acts as the sole tap target.
-- **Never below 16px.** A 14px or 12px icon is unreadable at arm's length, untappable on mobile, and signals that the designer didn't commit to including it. If an icon is too small to be useful, remove it — don't shrink it.
+Do not label these as separate database corridors.
 
-### Color & Contrast
+### 7. Agent plus deterministic engine
 
-- Icons inherit their parent's text color by default (`currentColor`).
-- Standalone/floating icons use `var(--surface-text-muted)` at rest and `var(--surface-ink)` on hover. They must reach at least WCAG AA contrast against their background at rest (not just on hover).
-- Never use icons at opacity below 0.5 at rest. If the icon is meant to be subtle, use `var(--surface-text-muted)` — that's what it's for.
+Use a two-column responsibility ledger:
 
-### Floating / Toggle Icons
+| Jumpship | Deterministic engine |
+|---|---|
+| Investigates evidence | Executes compiled transforms |
+| Recommends target design | Loads snapshot and bulk data |
+| Explains uncertainty and trade-offs | Applies CDC and reconciliation |
+| Requests human decisions | Runs verification and gates |
+| Supervises the trajectory | Produces effect receipts |
 
-When an icon floats over content (sidebar collapse toggles, panel dismiss, overlay controls):
+The visual should make it impossible to infer that model output directly mutates records.
 
-- **No container.** No background fill, no border, no shadow, no card-like wrapper. The icon sits directly on the surface. If it needs a hit area, use transparent padding (`p-1.5`), not a visible shape.
-- **Flat always.** A floating icon with a shadow or elevated container is a bug. The icon is part of the surface, not above it.
-- **Opacity pattern:** `opacity-50` at rest, `opacity-100` on hover. Transition on opacity only (`transition-opacity`).
-- **Positioning:** 8px offset from the nearest edge (never flush, never attached to a border).
+### 8. Proof and reversibility
 
-### Named Rules
+Show the relationship between:
 
-**The No Tiny Icons Rule.** 16px is the floor. No icon in the system renders below 16×16px. If a layout demands a smaller icon, redesign the layout.
+- rehearsed runbook;
+- versioned mapping;
+- signed verification;
+- named-approver cutover;
+- 72-hour reverse-sync and rollback window;
+- rollback viability;
+- named-approver decommission;
+- honest retention and deletion states.
 
-**The No Container Rule.** Floating icons never sit inside a visible container (no bg, no border, no shadow). A floating icon with a white circle behind it is a design defect. Use padding for hit area, not decoration.
+A horizontal reversibility timeline is preferred over a generic testimonial block.
 
-**The Icon-Earns-Its-Place Rule.** Every icon must compress meaning that text alone delivers slower. If the icon is purely decorative or duplicates adjacent text, remove it. No emoji in UI chrome. No decorative icons without function.
+### 9. Structural boundaries
 
-## 7. Motion
+Use a compact incapability list:
 
-Motion communicates spatial relationships and state changes. It is never decorative. Every transition maps to a named pattern with fixed timing and easing.
+- cannot write the source;
+- cannot flip traffic by itself;
+- cannot bypass quarantine or consent;
+- cannot widen its tools or credentials;
+- cannot provision or destroy its own migration cell;
+- cannot delete retained proof early;
+- cannot claim success without verification.
 
-### Easing Curves
+Pair each statement with the enforcing class: source grant, isolated cell, broker policy, state gate, or evidence contract.
 
-- **Ease Out** (`--ease-out`: `cubic-bezier(0.23, 1, 0.32, 1)`): Standard deceleration for hover states and micro-interactions.
-- **Ease Out Expo** (`--ease-out-expo`: `cubic-bezier(0.16, 1, 0.3, 1)`): Exponential deceleration for reveals and spatial movements. The element arrives quickly and settles gently.
-- **Ease In-Out** (`--ease-in-out`: `cubic-bezier(0.77, 0, 0.175, 1)`): Symmetric curve for mode transitions and state crossfades.
+### 10. Closing CTA
 
-### Duration Scale
+Return to the visitor's actual migration:
 
-- **Micro** (150ms): Hover states, button feedback, focus rings. Immediate response.
-- **Panel** (200ms): Sidebar collapse/expand, panel slides. Structural repositioning.
-- **Settle** (250ms): Disclosure reveals, content appearing/disappearing. Needs time for the eye to track.
-- **State** (300ms): Mode switches, full-page crossfades. Major context shifts.
+**Bring the Atlas system you cannot afford to migrate blindly.**
 
-### The Settle Reveal Pattern
+Primary action: **Talk through your migration**
 
-The system's standard animation for any collapsible disclosure element. Combines three coordinated movements into one cohesive gesture.
+Secondary copy should name the corridor and avoid implying support for other database pairs.
 
-**Spec:**
-- Height: `grid-template-rows: 0fr → 1fr` (GPU-composited, real height transition)
-- Horizontal: `grid-template-columns: 0fr → 1fr` (`.settle-reveal-x` variant)
-- Opacity: `0 → 1` (fade in simultaneously)
-- Settle: `translate(-distance) → translate(0)` (content lands into position)
-- Easing: `--ease-out-expo` on all three properties
+## Component Grammar
 
-**Parametric — duration and distance scale with element size:**
+### Surfaces
 
-| Size | Element | `--settle-duration` | `--settle-distance` |
-|------|---------|---------------------|---------------------|
-| Small (≤64px) | Search bars, filter rows, inline details | `250ms` (default) | `4px` (default) |
-| Medium (64–200px) | Expandable sections, tall panels | `300ms` | `6px` |
-| Large (≥200px) | Sidebars, full-height panels | `350ms` | `8px` |
+- Default to content directly on Ground.
+- Use Surface for an instrument that needs separation.
+- Use Surface subtle for alternate bands and grouped evidence.
+- Radius is a five-step system: 6px chips, 9px controls, 12px compact groups, 14px elevated surfaces, and 16px major frames. The migration flight recorder may use 18px because it is the hero instrument.
+- Ledger rows and internal dividers stay square inside their rounded parent so dense information still aligns cleanly.
+- Circles are reserved for status dots, role glyphs, and diagrams whose geometry carries meaning.
+- Hairlines are the default depth mechanism.
+- Shadows are reserved for truly floating menus or overlays and remain soft.
 
-Override on the wrapper element via CSS custom properties:
-```html
-<div class="settle-reveal-x"
-     data-open="true|false"
-     style="--settle-duration: 350ms; --settle-distance: 8px">
-```
+### Buttons and links
 
-**Implementation:** CSS utility classes in `globals.css`:
+- Minimum target size: 44 by 44 CSS pixels.
+- Primary: SSAI Blue fill, white text, 9px radius.
+- Secondary: transparent or Surface background, Hairline border, Ink text.
+- One primary action per decision region.
+- Hover, focus, active, and disabled states are visually distinct.
+- Every external action states where it goes; no vague “Get started.”
 
-```html
-<!-- Vertical (default) -->
-<div class="settle-reveal" data-open="true|false">
-  <div>
-    <div class="settle-reveal-inner">...content...</div>
-  </div>
-</div>
+### Status and metadata
 
-<!-- Horizontal (sidebars) -->
-<div class="settle-reveal-x" data-open="true|false">
-  <div>
-    <div class="settle-reveal-x-inner">...content...</div>
-  </div>
-</div>
-
-<!-- Horizontal from right -->
-<div class="settle-reveal-x settle-reveal-x-right" data-open="true|false">
-  ...
-</div>
-```
-
-**Use for:** Any element that reveals from zero size — search bars, expandable sections, filter panels, inline details, sidebars, collapsible settings.
-
-**Do not use for:** Modals (use Layer 3 + opacity), tooltips (use instant or 150ms opacity only).
-
-### Named Rules
-
-**The Settle Reveal Rule.** Every disclosure that animates height or width uses the settle-reveal pattern. No `max-height` hacks, no `height: auto` JavaScript measurements, no accordion libraries. The grid-rows/columns technique with the settle translate is the single sanctioned approach.
-
-**The Proportional Motion Rule.** Animation duration and settle distance must scale with the visual size of the element being animated. A 32px search bar at 250ms feels smooth; a 280px sidebar at 250ms feels abrupt. Override `--settle-duration` and `--settle-distance` on larger elements. The size guidance table in the settle-reveal spec is the reference.
-
-**The No Layout Animation Rule.** Never animate CSS layout properties (`width`, `height`, `margin`, `padding`, `top`, `left`). Use `transform` and `opacity` for spatial movement. The settle-reveal pattern uses `grid-template-rows` as the sole exception because it composites efficiently in modern browsers.
-
-**The No Bounce Rule.** No elastic, spring, or overshoot easing anywhere in the system. Elements arrive and stop. The exponential ease-out curve decelerates smoothly without overshooting the target position.
-
-### Do:
-
-- **Do** use Warm Surface (`#fffefc`) as the universal ground surface. Never cold `#ffffff` for backgrounds; reserve that for Card White on lifted elements only.
-- **Do** use hairline borders (`1px Warm Hairline`) as the default depth mechanism. Reach for a border before reaching for a shadow.
-- **Do** use the shadow layer vocabulary (inset, layer-1, layer-2, layer-3) when depth is needed. Each shadow maps to a structural tier.
-- **Do** use 4px increments for internal component spacing (icon-to-text gaps, label-to-value padding). Use 8px page grid for spacing between components.
-- **Do** use Geist Mono as a density texture in data-heavy views (tables, logs, metadata). It compresses information without decorating it.
-- **Do** reserve Tiempos for the six permitted contexts (page titles, thread titles, action gate headings, report titles, empty states, Infra Health headline). Set everything else in Geist.
-- **Do** limit Coral to one appearance per visible screen. Its rarity is its power.
-- **Do** communicate status with proportional indicators (6px dots, 8%-opacity tinted pills) paired with text or icon. Never color alone.
-- **Do** use the mode-dependent CSS variables (`--surface-bg`, `--surface-text`, etc.) so components adapt to Normal/Meta mode automatically.
-- **Do** respect `prefers-reduced-motion`. Disable pulse animations and use instant transitions.
-- **Do** use Geist Mono exclusively as a system signal for machine-generated content (timestamps, IDs, environment labels). Color it as Quiet Metadata or Secondary Text.
-- **Do** maintain WCAG AA contrast ratios (4.5:1 body text, 3:1 large text) across both Normal and Meta modes.
-- **Do** show `cursor: pointer` on every clickable element (buttons, links, tabs, toggles, selects, menu items). The global rule in `globals.css` handles this; never override it to `cursor: default` on interactive elements.
-- **Do** use the 8px spacing scale. Vary spacing for rhythm; same padding everywhere is monotony.
-
-### Don't:
-
-- **Don't** use a generic shadcn admin panel aesthetic: gray-on-white, every component at default, no design opinion. SSAI's brand is austere and precise.
-- **Don't** build a Datadog-lite dashboard: metric-dense, widget-heavy, monitoring-tool energy. The control plane is for verification, not real-time monitoring.
-- **Don't** use terminal/cyberpunk aesthetics: dark neon, monospace everything, hacker cosplay. Geist Mono is texture, not theme.
-- **Don't** build a chatbot with charts: chat bubble UI with decorative visualizations bolted on. Messages do not use bubbles. This is not a chatbot.
-- **Don't** create Devin-style AI agent theater: flashy autonomy demos, dark themes, opacity disguised as capability. The interface proves competence through inspectable evidence, not spectacle.
-- **Don't** build PagerDuty-style alert tools: dense, alert-centric, feels like monitoring software rather than a colleague's workspace.
-- **Don't** use `#000000` anywhere. Darkest value is Deep Ink (`#111111`). Dark mode ground is `#262626`.
-- **Don't** use Inter, system sans-serif, or any font besides Geist/Geist Mono/Tiempos Text.
-- **Don't** use Tailwind's default blue. The accent is SSAI Blue (`#254bf1`) exclusively.
-- **Don't** nest cards inside cards. Use indentation and hairlines for depth within containers.
-- **Don't** use heavy box shadows. Layer 1 (`0 1px 2px ...`) is the maximum for inline elements; higher tiers are reserved for floating surfaces.
-- **Don't** use shadows as decoration. Every shadow must map to one of the four structural tiers (inset, layer-1, layer-2, layer-3). Ambient glow, decorative diffusion, and aesthetic-only shadows are forbidden.
-- **Don't** use `border-left` or `border-right` greater than 2px as a colored accent stripe on cards or list items. The thread row's 2px active indicator is the system's only permitted left-border accent.
-- **Don't** use gradient text (`background-clip: text`). Emphasis is through weight or size, not decoration.
-- **Don't** use bouncy, elastic, or playful animation. Motion eases out with exponential curves. No bounce.
-- **Don't** add decorative icons without function. No emoji in UI chrome.
-- **Don't** leave interactive elements with `cursor: default`. If it's clickable, it shows a pointer. No exceptions.
-- **Don't** use purple anywhere. SSAI Blue and Coral never interpolate.
-- **Don't** let status colors fill large backgrounds. Dots and pills only.
-
-## 8. Landing Hero Thread Sidebar Replica
-
-The landing page hero uses the `ssai-frontend` thread sidebar as a product-native proof surface. It is not a decorative mockup. It copies the sidebar grammar from:
-
-- `ssai-frontend/src/components/shell/left-sidebar.tsx`
-- `ssai-frontend/src/components/threads/thread-sidebar.tsx`
-- `ssai-frontend/src/components/threads/thread-row.tsx`
-- `ssai-frontend/src/components/threads/sub-thread-row.tsx`
-- `ssai-frontend/src/components/primitives/source-icon.tsx`
-- `ssai-frontend/src/app/globals.css`
-
-### Sidebar Shell
-
-- Width is `280px`, matching the product left sidebar.
-- Ground is `var(--surface-bg, var(--bg-light))`.
-- The rail is separated with a `1px` Warm Hairline right border.
-- Large open and close movements use `.settle-reveal-x` with `--settle-duration: 350ms` and `--settle-distance: 8px`.
-- The landing hero keeps the rail visible by default because the surface is the main proof object.
-
-### Header Controls
-
-- Header uses `px-3 pt-3 pb-2`.
-- Title is Geist `13px` semibold in `text-ink`.
-- Search, filter, and new-thread buttons are `p-1.5`, `16px` icons, `rounded-md`.
-- Hover transition is `150ms` on color and background.
-- Active search/filter state uses `bg-[var(--surface-active)] text-ink`.
-- Filter count is a `7px` accent dot, never a large badge.
-
-### Thread Rows
-
-- Each row wrapper uses `mx-1.5`.
-- Main row uses `px-3 py-2 rounded-lg transition-colors duration-150`.
-- Active row uses `bg-[var(--surface-active)]`.
-- Inactive row uses `hover:bg-[var(--surface-hover)]`.
-- Thread title uses Geist `13.5px`, tight leading, `font-medium text-ink` only for unread/high-attention rows.
-- Right metadata column has a minimum width of `24px`.
-- Time text uses Geist Mono `10.5px`, tabular numerals, `text-text-muted`.
-
-### Metadata Chip Expansion
-
-Thread metadata is compressed at rest and expands on row hover:
-
-- Creator, label, and source chips use `grid grid-cols-[0fr]`.
-- On `.group:hover`, chips transition to `grid-cols-[1fr]`.
-- Transition is `200ms ease-out` for `grid-template-columns`.
-- Label text fades with `opacity 150ms`.
-- Creator text also translates from `-translate-x-2` to `translate-x-0` over `200ms`.
-- Hidden text remains in overflow-hidden wrappers so the row does not jump.
+- Status is always named in text.
+- Dots are 6px; compact rules are 2px.
+- Version, evidence root, phase, lag, and timestamp use Geist Mono.
+- Do not invent a confidence score.
+- Use absolute time alongside countdowns when consequence matters.
 
 ### Icons
 
-- Row category icons are 12px inside compact label chips.
-- Header action icons are 16px.
-- Overflow menu icons are 18px in a 24px hit area.
-- Subthread overflow icons are 14px in a 20px hit area.
-- System-created threads use `logo-icon.png` at 16px with a 3px radius.
-- On hover, the system creator chip expands to the Tiempos mini-wordmark: blue `ss`, coral `ai`.
-- Non-system creators use a 16px circular initial token with `bg-rule`.
-- Source icons are functional signals only. Use them for Slack, GitHub, Codex, and similar provenance, not decoration.
+- Use Lucide or a consistent line icon set.
+- Standard size: 18px.
+- Compact floor: 16px for controls and functional signals; a scaled illustrative instrument may use smaller non-interactive diagram marks.
+- Prominent maximum: 20px.
+- Icons are functional signals, not decoration.
+- No emoji in interface chrome.
+- Third-party marks identify the launch corridor only; they do not form a capability logo wall.
 
-### Status Dots
+### Data displays
 
-- Main thread status dots are `6px`.
-- Subthread status dots are `5px`.
-- Awaiting approval uses amber with `.dot-glow-warning`.
-- In progress uses blue with `.dot-glow-blue`.
-- Danger/open incident uses red with `.dot-glow-danger`.
-- Resolved unread may use emerald without glow.
-- Glow animations run for `2s ease-in-out infinite` and must respect `prefers-reduced-motion` through the global motion rule.
+- Prefer native tables, definition rows, CSS bars, and simple SVG.
+- Do not add a chart library for a sparkline, phase rail, or progress bar.
+- A table becomes labeled definition rows on narrow screens.
+- Color never carries status alone.
 
-### Overflow Menus
+## Copy System
 
-- Overflow buttons are always present in layout, but hidden at rest with `opacity-0 pointer-events-none`.
-- Hover or open state changes to `opacity-100`.
-- Transition properties are `opacity`, `color`, and `background-color` over `150ms`.
-- Menus use Layer 2 depth. They are operational controls, not decorative popovers.
+### Naming rules
 
-### Subthreads
+- First mention: **SSAI gives you Jumpship, its database-migration agent.**
+- Corridor: **MongoDB Atlas → Supabase/PostgreSQL**.
+- Short corridor after first mention: **Atlas → PostgreSQL**.
+- Use **Jumpship** when describing investigation, recommendation, explanation, or supervision.
+- Use **deterministic engine** when describing record transformation, loading, CDC apply, reconciliation, verification, reverse sync, or gates.
 
-- Subthreads reveal through `.settle-reveal`, never `height: auto` JavaScript or `max-height` hacks.
-- Reveal default is `250ms` and `4px` vertical settle distance.
-- Subthread rows use `pl-8 pr-3 py-1.5 min-h-[36px]`.
-- The indent guide is `left-[22px]`, `1px`, `bg-rule`, `opacity-40`.
-- Active subthread uses `bg-[var(--surface-active)]`; inactive hover uses `hover:bg-[var(--surface-hover)]`.
+### Content order
 
-### Landing Adaptation Rule
+For every material claim:
 
-The landing page can place the sidebar inside a larger hero composition, but it should not reinterpret the row grammar. If the hero needs to demonstrate product credibility, reuse these exact mechanics: compact rows, expanding metadata, status dots, settle-revealed subthreads, quiet overflow actions, and source/label icons that explain provenance.
+1. Fact
+2. Evidence or basis
+3. Customer consequence
+4. Next action
+5. Reversibility or closing door
+
+### Exact language
+
+Prefer:
+
+- inspect;
+- census;
+- map;
+- rehearse;
+- quarantine;
+- load;
+- sync;
+- reconcile;
+- verify;
+- flip;
+- roll back;
+- watch;
+- decommission.
+
+Avoid:
+
+- zero downtime;
+- one-click migration;
+- magical;
+- migrate anything;
+- perfect schema;
+- fully autonomous;
+- no risk;
+- instant;
+- generic “continue” at a consequential boundary.
+
+Do not call design confirmation a consent. The two consent kinds are cutover and decommission.
+
+## Motion
+
+Motion supports comprehension and never becomes the proof.
+
+- Micro state: 120-180ms.
+- Panel or disclosure: 180-240ms.
+- Section or phase transition: 260ms maximum.
+- Use transform and opacity for movement.
+- Do not animate layout-affecting width, height, margin, or padding.
+- Progress animation must preserve stable dimensions.
+- No bounce, elastic overshoot, cursor trails, scan sweeps, or perpetual decorative loops.
+- Reduced-motion mode removes movement while keeping every state legible.
+
+## Responsive Behavior
+
+Acceptance viewports:
+
+- 375 × 812
+- 768 × 1024
+- 1280 × 800
+- 1440 × 900
+- 1920 × 1080
+
+### Wide
+
+- Hero uses the seven/five split.
+- Corridor and trajectory can remain horizontal.
+- Dense comparison sections use aligned columns.
+
+### Tablet and small laptop
+
+- Hero proof remains visible but moves below the main proposition when needed.
+- Trajectory becomes a compact rail plus stacked detail.
+- No central reading column shrinks below a comfortable measure.
+
+### Mobile
+
+- Product, agent, corridor, and CTA remain in the first viewport.
+- Corridor becomes a vertical source-to-target sequence.
+- Tables become labeled rows.
+- The full migration trajectory remains available without hover.
+- Proof and boundary sections preserve exact wording rather than collapsing into icon-only summaries.
+- No horizontal mystery scroll, clipped action, or carousel for consequential content.
+
+## Accessibility
+
+Target WCAG 2.2 AA.
+
+- One H1 and a logical heading hierarchy.
+- Semantic header, nav, main, section, and footer landmarks.
+- Skip link to main content.
+- Complete keyboard navigation.
+- Visible focus ring with at least 3:1 adjacent contrast.
+- Body text contrast of at least 4.5:1.
+- Text, icon, or pattern accompanies every color state.
+- Reflow at 320 CSS pixels and 200 percent zoom without lost content or actions.
+- Touch targets meet 44 by 44 CSS pixels.
+- Reduced motion preserves information.
+- Illustrative product states are labeled in visible text, not only accessible metadata.
+
+## Performance and Implementation Guidance
+
+- Build the marketing page server-first.
+- Use client islands only where interaction materially improves understanding.
+- Self-host Tiempos Text, Geist Sans, and Geist Mono.
+- No runtime font requests.
+- No heavy hero canvas, video background, chart library, or animation framework for basic effects.
+- Preserve stable dimensions to keep CLS at or below 0.10.
+- Target LCP at or below 2.5 seconds on the landing route.
+- Optimize images and avoid shipping unused platform-logo libraries.
+- The landing page contains no customer evidence, credentials, authenticated product state, or simulated safety mutation.
+
+## Anti-References
+
+The landing page is not:
+
+- a generic AI page with gradients, floating orbs, and vague automation copy;
+- a dark terminal or cyberpunk environment;
+- a dashboard mosaic of equal cards;
+- a chatbot transcript with speech bubbles;
+- a cloud-vendor logo wall;
+- a one-click converter pitch;
+- a generic enterprise page with unprovable statistics;
+- a product-app replica that fakes live state;
+- a page that implies support for database corridors outside Atlas → Supabase/PostgreSQL.
+
+## Do
+
+- Lead with the corridor and outcome.
+- Lead visually with SSAI and identify Jumpship correctly in the supporting copy.
+- Show the full trajectory, not only the happy data-load step.
+- Make design quality, deterministic execution, proof, and rollback equally visible.
+- Use hairlines, ledgers, phase rails, and evidence rows to create density.
+- Preserve SSAI Blue and SSAI Coral exactly.
+- Keep Coral rare.
+- Show structural incapabilities in customer language.
+- Label all illustrative state.
+- Make the primary CTA specific to the visitor's migration.
+
+## Do Not
+
+- Do not present Jumpship as the product name.
+- Do not imply every database pair is supported.
+- Do not use unrelated database or platform logos as social proof.
+- Do not frame a schema copy as a target design.
+- Do not imply that the model directly transforms records.
+- Do not claim zero downtime or automatic no-freeze dual-write.
+- Do not make dark mode the brand.
+- Do not substitute the canonical SSAI wordmark, use Inter, or make a runtime font request.
+- Do not nest cards or decorate empty space.
+- Do not hide caveats, rollback expiry, or destructive boundaries in fine print.
+
+## Acceptance Checklist
+
+- [ ] The page identifies SSAI as the product.
+- [ ] The page identifies Jumpship as SSAI's database-migration agent.
+- [ ] The page names only MongoDB Atlas → Supabase/PostgreSQL as the launch corridor.
+- [ ] The hero explains understanding, target design, supervised migration, proof, and rollback.
+- [ ] The migration trajectory runs from connect through decommission.
+- [ ] Agent reasoning and deterministic record-path execution are visibly distinct.
+- [ ] Source-read-only, isolation, consent, verification, and rollback boundaries are easy to find.
+- [ ] Cutover and decommission are the only consent kinds named.
+- [ ] No unsupported corridor, zero-downtime, perfect-schema, or automatic-dual-write claim appears.
+- [ ] Tiempos Text, Geist Sans, and Geist Mono are self-hosted.
+- [ ] SSAI Blue and SSAI Coral match their exact values.
+- [ ] Warm-light, hairline-first, visually dense composition holds at all acceptance viewports.
+- [ ] Keyboard, focus, contrast, reflow, touch-target, and reduced-motion checks pass.
+- [ ] Illustrative product state is visibly labeled.
+- [ ] An intended visitor can identify the product, agent, corridor, value, safety model, and next action within ten seconds.
+
+## Watermelon UI Comparison Variant
+
+The `experiment/watermelon-ui-landing` branch tests Watermelon UI as a
+copy-owned component registry, not as a replacement visual identity.
+
+- Continuous Tabs supplies the shared-selection motion for the migration acts
+  and floating desktop navigation.
+- Step Indicator supplies the interactive canonical phase trajectory.
+- Imported components must use the SSAI radius ladder: 9px controls, 12px
+  compact groups, 14px floating surfaces, 16px frames, and 18px instruments.
+- SSAI Blue remains the only primary interaction color. Watermelon green is not
+  part of the SSAI palette.
+- Tiempos, Geist Sans, and Geist Mono remain unchanged.
+- Motion uses 200 to 240ms exponential ease-out transitions. Springs, bounce,
+  infinite sweeps, and blur-heavy transitions from registry demos are removed.
+- The registry is allowed only where interaction improves comprehension.
+  Evidence rows, safety boundaries, consent, receipts, and rollback remain
+  opaque and ledger-like.
+- Promotion beyond the comparison branch requires component-level license and
+  provenance review.

@@ -1,387 +1,563 @@
-import Image from "next/image";
 import {
+  Activity,
+  ArrowDown,
   ArrowRight,
-  BarChart3,
-  BookOpen,
-  CircleDollarSign,
+  ArrowUpRight,
+  Binary,
+  BookOpenCheck,
+  Check,
+  CheckCircle2,
+  CircleDot,
+  Code2,
   Database,
-  Eye,
-  FileText,
+  FileCheck2,
+  Fingerprint,
+  GitBranch,
   KeyRound,
-  Layers,
-  MessageCircle,
-  Rocket,
-  RefreshCw,
-  Scale,
-  Shield,
-  Siren,
-  User,
+  LockKeyhole,
+  Network,
+  RefreshCcw,
+  ScanSearch,
+  ShieldCheck,
   Workflow,
   X,
 } from "lucide-react";
-import {
-  SiDatadog, SiGrafana, SiNewrelic,
-  SiOpenai, SiClaude, SiSlack,
-  SiGithubcopilot, SiGitlab, SiCircleci,
-  SiTerraform, SiGooglecloud, SiVercel,
-  SiHeroku, SiRailway, SiRender,
-  SiJira, SiPagerduty, SiOpsgenie,
-} from "react-icons/si";
-import type { IconType } from "react-icons";
-import { ExpandableTable } from "@/components/expandable-table";
-import { GridAnimation } from "@/components/grid-animation";
-import { FlowWalkthrough } from "@/components/flow-walkthrough";
-import { HeroScanSweep } from "@/components/hero-scan-sweep";
-import { HeroThreadSidebar } from "@/components/hero-thread-sidebar";
-import { ThesisReader } from "@/components/thesis-reader";
-import { BlinkingLogo } from "@/components/blinking-logo";
+import { BrandLockup } from "@/components/brand-lockup";
+import { MigrationFlightRecorder } from "@/components/migration-flight-recorder";
 import { MobileNav } from "@/components/mobile-nav";
-import { AskSSAI } from "@/components/ask-ssai";
+import { WatermelonProtocol } from "@/components/watermelon-protocol";
+import { WatermelonSiteNav } from "@/components/watermelon-site-nav";
 
-const employeeRows: [string, typeof MessageCircle, string, typeof Eye][] = [
-  ["waits for queries", MessageCircle, "notices work", Eye],
-  ["returns data", Database, "gives judgment", Scale],
-  ["needs a human operator", User, "owns the loop", RefreshCw],
-  ["shows dashboards", BarChart3, "leaves decision records", FileText],
-  ["resets every session", RefreshCw, "builds operational memory", Layers],
-];
+const proofPoints = [
+  ["Source", "Read-only by construction"],
+  ["Execution", "Deterministic record path"],
+  ["Proof", "Independent verification"],
+  ["Recovery", "72-hour rollback window"],
+] as const;
 
+const failureModes = [
+  "Historical schema drift",
+  "Defaults that exist only in code",
+  "Unknown writers and background jobs",
+  "Batch and CDC transform divergence",
+  "Equal counts with ghost rows",
+  "A rollback plan nobody executed",
+] as const;
 
-const economicRows: { label: string; icon: typeof Rocket; color: string; bg: string; without: string; breaks: string; ssai: string }[] = [
-  { label: "Release follow-through", icon: Rocket, color: "#254bf1", bg: "rgba(37,75,241,0.07)", without: "CTO or backend engineer", breaks: "failed deploys stall product work", ssai: "investigates, recommends, rolls back, documents" },
-  { label: "Incident triage", icon: Siren, color: "#c2410c", bg: "rgba(194,65,12,0.07)", without: "whoever is awake", breaks: "context gathering repeats every time", ssai: "correlates changes, alerts, logs, and service state" },
-  { label: "CI/CD maintenance", icon: Workflow, color: "#7c3aed", bg: "rgba(124,58,237,0.07)", without: "original pipeline author", breaks: "release paths get brittle", ssai: "traces failures and records repair patterns" },
-  { label: "Cloud cost review", icon: CircleDollarSign, color: "#0d7377", bg: "rgba(13,115,119,0.07)", without: "nobody until the bill spikes", breaks: "cuts become reactive", ssai: "watches anomalies and explains movers" },
-  { label: "Cert, secret, access hygiene", icon: KeyRound, color: "#b45309", bg: "rgba(180,83,9,0.07)", without: "postponed until urgent", breaks: "avoidable incidents appear", ssai: "tracks expiry, drift, and risky changes" },
-  { label: "Runbook upkeep", icon: BookOpen, color: "#2d8a4e", bg: "rgba(45,138,78,0.07)", without: "rarely maintained", breaks: "tribal knowledge expands", ssai: "turns operational exhaust into memory" },
-];
+const migrationSurfaces = [
+  {
+    number: "01",
+    title: "Document to relational redesign",
+    label: "MODEL",
+    description:
+      "Nested BSON, polymorphic records, references, TTLs, indexes, IDs, and dirty types become an explicit PostgreSQL model. JSONB remains only where the evidence justifies it.",
+    output: "Versioned target design",
+  },
+  {
+    number: "02",
+    title: "Snapshot and bulk backfill",
+    label: "BASELINE",
+    description:
+      "Jumpship chooses the strongest provable Atlas snapshot rung, seals T0, restores it, and self-proves the baseline before movement starts.",
+    output: "Immutable golden snapshot",
+  },
+  {
+    number: "03",
+    title: "Live change migration",
+    label: "CDC",
+    description:
+      "MongoDB change streams keep PostgreSQL current through one compiled transform shared by batch and CDC, with token-loss rebaseline and explicit drift handling.",
+    output: "Gap-free forward sync",
+  },
+  {
+    number: "04",
+    title: "Rehearsed production cutover",
+    label: "SWITCH",
+    description:
+      "Freeze, drain, verify, flip, smoke, and unfreeze are compiled into a runbook and rehearsed against production-shaped conditions before the real switch.",
+    output: "Measured closing door",
+  },
+  {
+    number: "05",
+    title: "Reverse migration and rollback",
+    label: "RECOVERY",
+    description:
+      "Qualified reverse sync keeps the old source current for a mandatory 72-hour window. Rollback is executed in rehearsal, not left as prose.",
+    output: "Current escape path",
+  },
+  {
+    number: "06",
+    title: "Verification and handoff",
+    label: "PROOF",
+    description:
+      "Five independent verification layers, migration-specific watch, honest retention states, and an on-demand dossier close the engagement with evidence.",
+    output: "Signed integrity envelope",
+  },
+] as const;
 
+const verifierLayers = [
+  ["01", "Complete accounting", "Every source record resolves to target, quarantine, or an explicit ruling."],
+  ["02", "Business invariants", "Balances, uniqueness, aggregates, and domain truths hold after transformation."],
+  ["03", "Canonical record hashes", "One hundred percent canonical comparison catches silent value changes."],
+  ["04", "Both-direction structure", "Ghost rows, omissions, foreign keys, quarantine, and target-only drift are checked."],
+  ["05", "Query semantics", "Values, ordering, pagination, collation, and expected errors behave as the application expects."],
+] as const;
 
-const notRows: { title: string; body: string; logos: { name: string; icon: IconType }[] }[] = [
-  { title: "Observability dashboard", body: "Dashboards expose signals. SSAI turns signals into handled work.", logos: [{ name: "Datadog", icon: SiDatadog }, { name: "Grafana", icon: SiGrafana }, { name: "New Relic", icon: SiNewrelic }] },
-  { title: "Infra chatbot", body: "Chat is one doorway. The product object is the thread, action record, and memory.", logos: [{ name: "OpenAI", icon: SiOpenai }, { name: "Claude", icon: SiClaude }, { name: "Slack", icon: SiSlack }] },
-  { title: "DevOps copilot", body: "Copilots wait beside a human operator. SSAI owns scoped operational loops.", logos: [{ name: "GitHub Copilot", icon: SiGithubcopilot }, { name: "GitLab", icon: SiGitlab }, { name: "CircleCI", icon: SiCircleci }] },
-  { title: "Generic infra workspace", body: "SSAI is not a prettier cloud console. It behaves like a teammate across channels.", logos: [{ name: "Terraform", icon: SiTerraform }, { name: "Google Cloud", icon: SiGooglecloud }, { name: "Vercel", icon: SiVercel }] },
-  { title: "Traditional managed service", body: "The product is software-native, inspectable, and continuously improving.", logos: [{ name: "Heroku", icon: SiHeroku }, { name: "Railway", icon: SiRailway }, { name: "Render", icon: SiRender }] },
-  { title: "Approval theater", body: "Approvals and vetoes exist where policy requires them. Inspectability comes first.", logos: [{ name: "Jira", icon: SiJira }, { name: "PagerDuty", icon: SiPagerduty }, { name: "Opsgenie", icon: SiOpsgenie }] },
-];
+const incapabilities = [
+  "write to the MongoDB source",
+  "flip application traffic",
+  "read or release credentials",
+  "bypass quarantine or consent",
+  "delete the golden snapshot",
+  "widen its tools or IAM",
+  "provision or destroy its own cell",
+] as const;
 
-const competitors = [
-  ["Observability", ["Datadog", "Grafana", "New Relic"]],
-  ["Incident tools", ["PagerDuty", "FireHydrant", "Rootly"]],
-  ["Infra workspaces", ["Clanker", "AWS", "GCP"]],
-  ["AI coding agents", ["Codex", "Claude Code", "Cursor"]],
-];
+const faqs = [
+  {
+    question: "Which databases does Jumpship support today?",
+    answer:
+      "The first production corridor is MongoDB Atlas to customer-owned Supabase PostgreSQL. The architecture is corridor-based so it can expand, but SSAI does not advertise unqualified universal migration support.",
+  },
+  {
+    question: "Is this just an AI-generated migration script?",
+    answer:
+      "No. Jumpship investigates and makes evidence-backed recommendations. A versioned deterministic engine performs every record transform, load, CDC apply, reconciliation, verification, and reverse-sync effect.",
+  },
+  {
+    question: "Can the cutover be interruption-free?",
+    answer:
+      "Jumpship measures the freeze and drain window from rehearsals, shows the basis, and refuses to replace evidence with a generic downtime guarantee.",
+  },
+  {
+    question: "What happens if the cutover goes wrong?",
+    answer:
+      "The cutover is rehearsed before production. After the flip, reverse sync keeps rollback current for the mandatory 72-hour window when the corridor qualifies. Rollback uses the rehearsed operation and then requires resync, reverification, and fresh consent before another cutover.",
+  },
+] as const;
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-clip bg-[var(--surface-bg)] text-[var(--surface-text)]">
-      <header className="fixed top-0 left-0 right-0 z-30 pointer-events-none">
-        <div className="mx-auto mt-4 flex h-12 max-w-7xl items-center justify-between rounded border border-rule/20 bg-[color-mix(in_srgb,var(--surface-bg)_25%,transparent)] px-5 backdrop-blur-sm pointer-events-auto md:mt-3 mx-3 md:mx-auto">
-          <Image
-            src="/logo-full.png"
-            alt="SSAI"
-            width={80}
-            height={32}
-            priority
-            className="h-8 w-auto"
-            style={{ width: "auto" }}
-          />
-          <nav className="hidden items-center gap-6 text-[13px] font-medium text-text-muted md:flex">
-            <a className="transition-micro hover:text-text-mid" href="#flow">Flow</a>
-            <a className="transition-micro hover:text-text-mid" href="#not">Not</a>
-            <a className="transition-micro hover:text-text-mid" href="#thesis">Thesis</a>
-            <a className="transition-micro hover:text-text-mid" href="#ask">Ask</a>
-            <a className="transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">Contact</a>
-          </nav>
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+
+      <header className="site-header">
+        <div className="site-header__inner">
+          <a className="site-header__brand" href="#top" aria-label="SSAI home">
+            <BrandLockup compact />
+            <span className="site-header__descriptor">migration systems</span>
+          </a>
+          <WatermelonSiteNav />
           <MobileNav />
+          <a
+            className="button button--header"
+            href="https://cal.com/avinier"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Migration review
+            <ArrowUpRight aria-hidden="true" />
+          </a>
         </div>
       </header>
 
-      <div id="surface" className="grid-field relative min-h-[90svh] overflow-hidden" style={{ "--grid-size": "21px", "--grid-opacity": "0.06" } as React.CSSProperties}>
-        <GridAnimation gridCell={21} dotSpacing={42} />
-        <HeroScanSweep />
-      <section className="relative mx-auto grid max-w-7xl gap-8 px-5 pt-20 pb-8 md:grid-cols-[0.9fr_1.1fr] md:items-center md:pb-10" style={{ minHeight: "inherit" }}>
-        <div className="relative z-10">
-          <p className="font-mono text-[11px] uppercase tracking-normal text-text-muted">
-            Cognitive DevOps engineer
-          </p>
-          <h1 className="mt-4 max-w-[640px] font-title text-[clamp(42px,6vw,72px)] leading-[0.98] text-ink">
-            Teams without DevOps still need DevOps judgment.
-          </h1>
-          <p className="mt-5 max-w-[580px] text-[16px] leading-7 text-text-mid">
-            SSAI self-onboards to your cloud and Kubernetes stack, handles operational work, and leaves an inspectable record of what it did and why.
-          </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <a className="inline-flex h-9 items-center justify-center rounded-md bg-ssai-blue px-4 text-[14px] font-medium transition-micro hover:bg-ssai-blue/90 active:scale-[0.97]" style={{ color: "#fffefc" }} href="https://cal.com/avinier" target="_blank" rel="noopener noreferrer">
-              Book a call
-            </a>
-            <a className="inline-flex h-9 items-center justify-center rounded-md border border-rule bg-[var(--surface-bg)] px-4 text-[14px] font-medium text-text transition-micro hover:bg-[var(--surface-hover)] active:scale-[0.97]" href="#flow">
-              Join waitlist
-            </a>
-          </div>
-          <a
-            href="#ask"
-            className="group mt-8 inline-flex items-center gap-2.5 font-mono text-[13px] text-text-muted transition-micro hover:text-ssai-blue"
-          >
-            <span className="text-ssai-blue">Try it</span>
-            <span className="hidden sm:inline">Ask SSAI about your stack</span>
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
-          </a>
-        </div>
-
-        <div className="relative z-10">
-          <HeroThreadSidebar />
-        </div>
-      </section>
-      </div>
-
-      <section className="border-y border-rule bg-[var(--surface-card)]">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 pt-20 pb-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Category</p>
-            <h2 className="mt-4 max-w-[520px] font-title text-[clamp(36px,5vw,68px)] leading-[1.02] text-ink">
-              Not a DevOps tool. A DevOps <span className="text-ssai-coral">teammate.</span>
-            </h2>
-            <p className="mt-5 max-w-[560px] text-[17px] leading-7 text-text-mid">
-              Tools wait for someone to operate them. SSAI receives work, investigates, replies in your team channels, acts within policy, and leaves a record your team can inspect later.
-            </p>
-            <a href="#thesis" className="mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-ssai-blue transition-micro hover:gap-3">
-              Read more
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-
-          <div className="border border-rule bg-[var(--surface-bg)]">
-            <div className="grid grid-cols-2 border-b border-rule font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
-              <div className="border-r border-rule px-5 py-3 text-center sm:px-6">Typical tool</div>
-              <div className="flex items-center justify-center px-5 py-2 sm:px-6">
-                <BlinkingLogo className="text-[18px]" />
+      <main id="main-content">
+        <section className="hero" id="top">
+          <div className="hero__grid" aria-hidden="true" />
+          <div className="hero__inner">
+            <div className="hero__copy">
+              <p className="eyebrow reveal reveal--1">
+                <span className="eyebrow__mark" />
+                Database migrations, fully accounted for
+              </p>
+              <h1 className="reveal reveal--2">
+                MongoDB to PostgreSQL,
+                <span>without the leap of faith.</span>
+              </h1>
+              <p className="hero__lede reveal reveal--3">
+                SSAI reads your data, application code, queries, writers, and
+                business rules. Its Jumpship agent designs a defensible PostgreSQL
+                model, then supervises a deterministic migration into Supabase with
+                signed proof and a rehearsed path back.
+              </p>
+              <div className="hero__actions reveal reveal--4">
+                <a
+                  className="button button--primary"
+                  href="https://cal.com/avinier"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Plan my migration
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
+                <a className="button button--text" href="#protocol">
+                  See the migration protocol
+                  <ArrowDown aria-hidden="true" />
+                </a>
+              </div>
+              <div className="launch-corridor reveal reveal--5">
+                <div className="launch-corridor__title">
+                  <span className="status-dot status-dot--green" aria-hidden="true" />
+                  <strong>Launching corridor</strong>
+                </div>
+                <div className="launch-corridor__route">
+                  <span>MongoDB Atlas</span>
+                  <ArrowRight aria-hidden="true" />
+                  <span>Supabase PostgreSQL</span>
+                </div>
+                <p>Snapshot + backfill · live CDC · measured cutover · reverse sync</p>
               </div>
             </div>
-            {employeeRows.map(([toolLabel, ToolIcon, ssaiLabel, SsaiIcon]) => (
-              <div key={toolLabel} className="grid grid-cols-2 border-b border-dashed border-rule/60 last:border-b-0">
-                <div className="flex items-center gap-3 border-r border-dashed border-rule/60 px-5 py-[18px] sm:gap-4 sm:px-6">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-rule/80 text-text-muted">
-                    <ToolIcon className="h-[18px] w-[18px]" />
-                  </div>
-                  <span className="text-[14px] leading-snug text-text-muted sm:text-[15px]">{toolLabel}</span>
-                </div>
-                <div className="flex items-center gap-3 px-5 py-[18px] sm:gap-4 sm:px-6">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ssai-blue/25 bg-ssai-blue/[0.05] text-ssai-blue">
-                    <SsaiIcon className="h-[18px] w-[18px]" />
-                  </div>
-                  <span className="text-[14px] font-medium leading-snug text-ink sm:text-[15px]">{ssaiLabel}</span>
-                </div>
+
+            <div className="hero__product reveal reveal--4">
+              <MigrationFlightRecorder />
+            </div>
+          </div>
+
+          <div className="proof-strip" aria-label="Core migration guarantees">
+            {proofPoints.map(([label, value]) => (
+              <div className="proof-strip__item" key={label}>
+                <span>{label}</span>
+                <strong>{value}</strong>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="mx-auto flex max-w-7xl items-start gap-8 px-5 pb-20 pt-0 sm:gap-10">
-          {[
-            { icon: Shield, title: "Policy-aware", desc: "Works within guardrails" },
-            { icon: FileText, title: "Always accountable", desc: "Leaves decision records" },
-            { icon: Layers, title: "Always improving", desc: "Builds operational memory" },
-          ].map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex items-start gap-2.5">
-              <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-text-muted" />
-              <div>
-                <p className="text-[13px] font-medium leading-tight text-ink">{title}</p>
-                <p className="mt-1 text-[12px] leading-tight text-text-muted">{desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="flow" className="grid-field relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-5 py-24">
-          <GridAnimation gridCell={21} dotSpacing={42} />
-          <div className="relative z-10 mx-auto max-w-3xl text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Actual flow</p>
-            <h2 className="mt-4 font-title text-[clamp(36px,5vw,66px)] leading-[1.05] text-ink">
-              Work starts where your team already is.
-            </h2>
-            <p className="mt-5 text-[17px] leading-7 text-text-mid">
-              Mention SSAI in Slack, reply from GitHub, continue in the frontend, or let a system trigger open the thread. The channel changes. The work object does not.
-            </p>
-          </div>
-          <FlowWalkthrough />
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Economics</p>
-            <h2 className="mt-4 max-w-[560px] font-title text-[clamp(34px,4vw,58px)] leading-[1.06] text-ink">
-              What a missing DevOps function actually costs.
-            </h2>
-            <p className="mt-5 max-w-[560px] text-[16px] leading-7 text-text-mid">
-              The comparison is not another SaaS seat. It is the operational responsibility currently absorbed by product engineers, founders, and whoever knows the production system best.
-            </p>
-          </div>
-          <ExpandableTable visibleRows={4}>
-            <div className="overflow-hidden border border-rule bg-[var(--surface-card)]">
-              <div data-econ-header className="grid grid-cols-[1.1fr_0.95fr_1fr_1.1fr] border-b border-rule bg-[var(--surface-bg)] font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted max-lg:hidden">
-                <div className="px-3 py-3">Responsibility</div>
-                <div className="px-3 py-3">Without DevOps</div>
-                <div className="px-3 py-3">What breaks</div>
-                <div className="px-3 py-3">SSAI ownership</div>
-              </div>
-              {economicRows.map((row) => {
-                const Icon = row.icon;
-                const cells = [
-                  { text: row.without, header: "Without DevOps", bold: false },
-                  { text: row.breaks, header: "What breaks", bold: false },
-                  { text: row.ssai, header: "SSAI ownership", bold: true },
-                ];
-                return (
-                  <div key={row.label} data-econ-row className="grid gap-3 border-b border-rule p-4 last:border-b-0 lg:grid-cols-[1.1fr_0.95fr_1fr_1.1fr] lg:gap-0 lg:p-0">
-                    <div className="text-[13.5px] leading-6 text-text-mid lg:border-r lg:border-rule lg:px-3 lg:py-4">
-                      <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted lg:hidden">Responsibility</span>
-                      <span className="flex flex-col items-center gap-1.5 text-center font-medium text-ink">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-md" style={{ backgroundColor: row.bg }}>
-                          <Icon className="h-[15px] w-[15px]" style={{ color: row.color }} />
-                        </span>
-                        {row.label}
-                      </span>
-                    </div>
-                    {cells.map((cell, i) => (
-                      <div key={cell.text} className="text-[13.5px] leading-6 text-text-mid lg:border-r lg:border-rule lg:px-3 lg:py-4 lg:last:border-r-0">
-                        <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted lg:hidden">
-                          {cell.header}
-                        </span>
-                        <span className={cell.bold ? "font-medium text-ink" : ""}>{cell.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })}
-            </div>
-          </ExpandableTable>
-        </div>
-      </section>
-
-      <section id="not" className="grid-field relative overflow-hidden px-5 py-24">
-        <GridAnimation gridCell={21} dotSpacing={42} />
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">Positioning</p>
-          <h2 className="mt-4 font-title text-[clamp(38px,5vw,68px)] leading-[1.05] text-ink">
-            What SSAI is <span className="text-ssai-coral">not.</span>
-          </h2>
-          <p className="mt-5 text-[17px] leading-7 text-text-mid">
-            SSAI is built for operational ownership. It is not another surface that hands more work back to the same engineers.
-          </p>
-        </div>
-        <div className="relative z-10 mx-auto mt-14 grid max-w-7xl gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-          {notRows.map((row) => (
-            <div key={row.title} className="text-center">
-              <div className="mx-auto flex h-8 w-8 items-center justify-center text-text-muted">
-                <X className="h-5 w-5" strokeWidth={2.5} />
-              </div>
-              <div className="mx-auto mt-4 flex items-center justify-center gap-5">
-                {row.logos.map((logo) => (
-                  <span key={logo.name} className="group relative">
-                    <logo.icon className="h-[18px] w-[18px] text-text-muted opacity-40 transition-opacity group-hover:opacity-70" />
-                    <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2 py-1 text-[11px] font-medium text-[var(--surface-bg)] opacity-0 transition-opacity group-hover:opacity-100">
-                      {logo.name}
-                    </span>
-                  </span>
-                ))}
-              </div>
-              <h3 className="mt-3 font-title text-[24px] italic leading-tight text-ink">{row.title}</h3>
-              <p className="mx-auto mt-4 max-w-[310px] text-[15px] leading-6 text-text-mid">{row.body}</p>
-            </div>
-          ))}
-        </div>
-        <div className="relative z-10 mx-auto mt-20 grid max-w-7xl gap-12 lg:grid-cols-[0.75fr_1.25fr]">
-          <div>
-            <h2 className="font-title text-[clamp(32px,4vw,52px)] leading-[1.08] text-ink">
-              Familiar logos, different job.
-            </h2>
-            <p className="mt-5 text-[16px] leading-7 text-text-mid">
-              These categories are useful reference points. SSAI does not sit inside any one of them, but uses them to do your work.
-            </p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {competitors.map(([group, logos]) => (
-              <div key={group as string} className="border border-rule bg-[var(--surface-bg)] p-4">
-                <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">{group}</div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {(logos as string[]).map((logo) => (
-                    <span key={logo} className="rounded-sm border border-rule bg-[var(--surface-card)] px-3 py-2 text-[13px] font-medium text-text-muted grayscale">
-                      {logo}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-            <div className="border border-ssai-blue bg-[rgba(37,75,241,0.10)] p-4 sm:col-span-2">
-              <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-ssai-blue">SSAI</div>
-              <div className="mt-4 font-title text-[32px] leading-tight text-ink">Cognitive DevOps engineer</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="thesis" className="border-t border-rule">
-        <ThesisReader />
-      </section>
-
-      <section id="ask" className="bg-[#131313]">
-        <div className="mx-auto max-w-7xl px-5 py-24">
-          <AskSSAI />
-        </div>
-      </section>
-
-      <footer className="border-t border-rule bg-[var(--surface-bg)] px-5 py-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <section className="section section--problem" id="why">
+          <div className="section-heading section-heading--split">
             <div>
-              <Image
-                src="/logo-full.png"
-                alt="SSAI"
-                width={72}
-                height={28}
-                className="h-7 w-auto"
-                style={{ width: "auto" }}
-              />
-              <p className="mt-2 max-w-[280px] text-[13px] leading-relaxed text-text-muted">
-                Cognitive DevOps engineer for teams that ship without a dedicated ops team.
+              <p className="section-kicker">01 · The real problem</p>
+              <h2>Moving rows is table stakes. Preserving what they mean is the migration.</h2>
+            </div>
+            <div className="section-heading__support">
+              <p>
+                A database migration changes data shape, query behavior, write paths,
+                failure modes, and the moment your application changes authority.
+                Copy tools see records. Jumpship reconstructs the system around them.
+              </p>
+              <p className="pull-quote">The script usually works. The assumptions are what ship corruption.</p>
+            </div>
+          </div>
+
+          <div className="failure-ribbon" aria-label="Common migration failure modes">
+            {failureModes.map((mode, index) => (
+              <div key={mode}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{mode}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="understanding-map">
+            <div className="understanding-map__inputs">
+              <p className="instrument-label">Evidence in</p>
+              <div><Code2 aria-hidden="true" /><span>Application code</span><small>models · queries · writers</small></div>
+              <div><Database aria-hidden="true" /><span>MongoDB reality</span><small>BSON · variants · history</small></div>
+              <div><Activity aria-hidden="true" /><span>Workloads</span><small>read paths · write physics</small></div>
+              <div><BookOpenCheck aria-hidden="true" /><span>Human knowledge</span><small>intent · constraints · horizon</small></div>
+            </div>
+
+            <div className="understanding-map__flow" aria-hidden="true">
+              <span className="signal-line"><i /></span>
+              <ArrowRight />
+            </div>
+
+            <div className="understanding-map__core">
+              <span className="core-orbit core-orbit--1" aria-hidden="true" />
+              <span className="core-orbit core-orbit--2" aria-hidden="true" />
+              <div>
+                <span className="core-mark">J</span>
+                <p>Jumpship</p>
+                <small>coherent system understanding</small>
+              </div>
+            </div>
+
+            <div className="understanding-map__flow" aria-hidden="true">
+              <span className="signal-line"><i /></span>
+              <ArrowRight />
+            </div>
+
+            <div className="understanding-map__output">
+              <p className="instrument-label">Defensible model out</p>
+              <h3>PostgreSQL designed for the business that actually runs.</h3>
+              <ul>
+                <li><Check /> Domain entities and invariants</li>
+                <li><Check /> Workload and index fit</li>
+                <li><Check /> Explicit assumptions and unknowns</li>
+                <li><Check /> Intentional debt and evolution triggers</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section--scope" id="scope">
+          <div className="section-heading section-heading--corridor">
+            <div>
+              <p className="section-kicker">02 · Current scope</p>
+              <h2>One corridor. The whole migration.</h2>
+            </div>
+            <div className="corridor-stamp" aria-label="Current supported corridor">
+              <Database aria-hidden="true" />
+              <div><span>SOURCE</span><strong>MongoDB Atlas</strong></div>
+              <ArrowRight aria-hidden="true" />
+              <div><span>TARGET</span><strong>Supabase PostgreSQL</strong></div>
+              <span className="corridor-stamp__status">MVP</span>
+            </div>
+          </div>
+
+          <p className="section-intro">
+            Jumpship does not sell a universal migration fantasy. The first production
+            corridor is narrow by design and complete by obligation. Every migration
+            surface below is included in the Atlas to Supabase path.
+          </p>
+
+          <div className="scope-table">
+            <div className="scope-table__header" aria-hidden="true">
+              <span>Migration surface</span>
+              <span>What Jumpship handles</span>
+              <span>Durable output</span>
+            </div>
+            {migrationSurfaces.map((surface) => (
+              <article className="scope-row" key={surface.title}>
+                <div className="scope-row__title">
+                  <span>{surface.number}</span>
+                  <div><small>{surface.label}</small><h3>{surface.title}</h3></div>
+                </div>
+                <p>{surface.description}</p>
+                <div className="scope-row__output"><CheckCircle2 aria-hidden="true" /><span>{surface.output}</span></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section section--protocol" id="protocol">
+          <div className="section-heading section-heading--split">
+            <div>
+              <p className="section-kicker">03 · Migration protocol</p>
+              <h2>One agent. One coherent migration.</h2>
+            </div>
+            <div className="section-heading__support">
+              <p>
+                Jumpship preserves the same evidence, decisions, and design intent
+                from first connection through decommission. It does not hand the
+                hard parts between disconnected scripts, dashboards, and documents.
+              </p>
+            </div>
+          </div>
+
+          <WatermelonProtocol />
+        </section>
+
+        <section className="section section--execution">
+          <div className="execution-heading">
+            <p className="section-kicker">04 · Architecture of trust</p>
+            <h2>Agentic judgment. Deterministic execution. Human authority.</h2>
+          </div>
+
+          <div className="execution-split">
+            <article className="execution-role execution-role--agent">
+              <div className="execution-role__label">
+                <span className="role-glyph">J</span>
+                <div><small>JUMPSHIP</small><strong>Reasons and supervises</strong></div>
+              </div>
+              <ul>
+                <li><ScanSearch /> Reconstructs code, data, workloads, and uncertainty</li>
+                <li><Network /> Designs the target model and migration sequence</li>
+                <li><GitBranch /> Recommends trade-offs and routes human decisions</li>
+                <li><BookOpenCheck /> Explains evidence, consequences, and reversibility</li>
+              </ul>
+            </article>
+
+            <div className="execution-contract">
+              <span className="execution-contract__line" aria-hidden="true" />
+              <div>
+                <Fingerprint aria-hidden="true" />
+                <small>HANDOFF CONTRACT</small>
+                <strong>Typed · versioned · signed</strong>
+              </div>
+              <span className="execution-contract__line" aria-hidden="true" />
+            </div>
+
+            <article className="execution-role execution-role--engine">
+              <div className="execution-role__label">
+                <span className="role-glyph"><Binary /></span>
+                <div><small>CORRIDOR ENGINE</small><strong>Moves and proves</strong></div>
+              </div>
+              <ul>
+                <li><Database /> Snapshots, transforms, and bulk loads records</li>
+                <li><RefreshCcw /> Applies CDC, reconciles, and reverse-syncs</li>
+                <li><ShieldCheck /> Enforces quarantine, gates, and write fencing</li>
+                <li><FileCheck2 /> Verifies independently and emits durable receipts</li>
+              </ul>
+            </article>
+          </div>
+
+          <div className="execution-axiom">
+            <CircleDot aria-hidden="true" />
+            <p>The model is never in the record path.</p>
+            <span>Humans authorize the two closing doors: cutover and decommission.</span>
+          </div>
+        </section>
+
+        <section className="section section--proof" id="proof">
+          <div className="proof-layout">
+            <div className="proof-copy">
+              <p className="section-kicker">05 · Independent verification</p>
+              <h2>A green check should survive an auditor.</h2>
+              <p>
+                The verifier does not trust loader success, CDC status, or the
+                agent&apos;s narrative. It reconstructs both sides and signs the
+                evidence only when every mandatory layer passes with zero unexplained
+                mismatch.
+              </p>
+              <div className="signed-proof">
+                <Fingerprint aria-hidden="true" />
+                <div><span>FINAL OUTPUT</span><strong>Signed integrity envelope</strong><small>reproducible · version-bound · independently verifiable</small></div>
+              </div>
+            </div>
+
+            <ol className="verifier-stack">
+              {verifierLayers.map(([number, title, description]) => (
+                <li key={title}>
+                  <span>{number}</span>
+                  <div><h3>{title}</h3><p>{description}</p></div>
+                  <Check aria-hidden="true" />
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="cutover" aria-labelledby="cutover-title">
+          <div className="cutover__grid" aria-hidden="true" />
+          <div className="cutover__inner">
+            <div className="cutover__copy">
+              <p className="section-kicker section-kicker--dark">06 · Reversibility</p>
+              <h2 id="cutover-title">The irreversible moment should be the smallest part of the migration.</h2>
+              <p>
+                Every material decision names its undo boundary. Cutover is rehearsed
+                before production. Silence means no. Postpone and abort stay easier
+                than advance.
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 text-[13px] sm:items-end">
-              <div className="flex flex-col gap-1.5 sm:items-end">
-                <a className="text-text-muted transition-micro hover:text-text-mid" href="mailto:adisubu.2410@gmail.com">
-                  adisubu.2410@gmail.com
-                </a>
-                <a className="text-text-muted transition-micro hover:text-text-mid" href="mailto:hello@ssai.dev">
-                  hello@ssai.dev
-                </a>
+            <div className="rollback-window">
+              <div className="rollback-window__number">72</div>
+              <div><span>HOURS</span><strong>mandatory reverse-sync rollback window</strong><p>Rollback currency stays visible while the exit is real.</p></div>
+            </div>
+
+            <ol className="cutover-sequence" aria-label="Cutover and rollback sequence">
+              {[
+                ["01", "Rehearse", "production-shaped"],
+                ["02", "Fresh consent", "named approver"],
+                ["03", "Freeze + drain", "measured"],
+                ["04", "Verify + flip", "receipt-bound"],
+                ["05", "Reverse sync", "rollback current"],
+                ["06", "Watch", "migration-specific"],
+                ["07", "Decommission", "second consent"],
+              ].map(([number, title, note], index) => (
+                <li key={title} className={index === 3 ? "cutover-sequence__door" : ""}>
+                  <span>{number}</span><strong>{title}</strong><small>{note}</small>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="section section--trust" id="trust">
+          <div className="trust-heading">
+            <div>
+              <p className="section-kicker">07 · Hard trust boundaries</p>
+              <h2>Autonomous inside one cell. Structurally incapable outside it.</h2>
+            </div>
+            <p>
+              Each migration runs in an isolated, single-tenant cell. Raw records,
+              source code, CDC bodies, and quarantine rows stay there. Shared services
+              receive allowlisted metadata, hashes, decisions, and scores.
+            </p>
+          </div>
+
+          <div className="boundary-system">
+            <div className="boundary-system__cell">
+              <div className="boundary-system__label"><LockKeyhole /> ISOLATED MIGRATION CELL</div>
+              <div className="boundary-system__sources">
+                <div><Database /><span>Atlas</span><small>read-only</small></div>
+                <div><Code2 /><span>Repository</span><small>selected + read-only</small></div>
               </div>
-              <div className="flex items-center gap-4">
-                <a href="https://x.com/avinierx" target="_blank" rel="noopener noreferrer" aria-label="SSAI on X" className="text-text-muted transition-micro hover:text-text-mid">
-                  <svg className="h-[16px] w-[16px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                </a>
-                <a href="https://linkedin.com/in/avinier" target="_blank" rel="noopener noreferrer" aria-label="SSAI on LinkedIn" className="text-text-muted transition-micro hover:text-text-mid">
-                  <svg className="h-[16px] w-[16px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
+              <div className="boundary-system__agent">
+                <span>J</span><div><strong>Jumpship + engine</strong><small>raw evidence remains here</small></div>
               </div>
+              <div className="boundary-system__target"><Database /><span>Customer-owned Supabase</span></div>
+            </div>
+
+            <div className="boundary-system__diode">
+              <span>ALLOWLISTED SUMMARIES ONLY</span>
+              <ArrowRight aria-hidden="true" />
+            </div>
+
+            <div className="boundary-system__shared">
+              <p className="instrument-label">SSAI control plane</p>
+              <div><Workflow /> phase + decisions</div>
+              <div><FileCheck2 /> hashes + receipts</div>
+              <div><KeyRound /> authorization gates</div>
+              <small>No raw customer evidence. No database credentials.</small>
             </div>
           </div>
 
-          <div className="mt-6 border-t border-rule pt-4">
-            <p className="font-mono text-[11px] text-text-muted">&copy; 2025 SSAI</p>
+          <div className="incapability-list">
+            <div className="incapability-list__heading">
+              <ShieldCheck aria-hidden="true" />
+              <div><span>CONSTITUTIONAL BOUNDARY</span><h3>Jumpship cannot</h3></div>
+            </div>
+            <ul>
+              {incapabilities.map((item) => <li key={item}><X aria-hidden="true" />{item}</li>)}
+            </ul>
           </div>
+        </section>
+
+        <section className="section section--faq">
+          <div className="faq-heading">
+            <p className="section-kicker">08 · Straight answers</p>
+            <h2>What a serious migration buyer asks next.</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <details key={faq.question} name="landing-faq">
+                <summary><span>{String(index + 1).padStart(2, "0")}</span><strong>{faq.question}</strong><i aria-hidden="true" /></summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="final-cta">
+          <div className="final-cta__grid" aria-hidden="true" />
+          <div className="final-cta__inner">
+            <div>
+              <p className="section-kicker">SSAI</p>
+              <h2>Bring us the migration you do not trust to a script.</h2>
+            </div>
+            <div className="final-cta__action">
+              <p>Currently onboarding MongoDB Atlas to Supabase PostgreSQL migrations.</p>
+              <a className="button button--primary" href="https://cal.com/avinier" target="_blank" rel="noreferrer">
+                Request a migration review
+                <ArrowUpRight aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+          <BrandLockup tone="dark" />
+          <p>Jumpship is SSAI&apos;s database migration agent.</p>
+          <div><a href="mailto:hello@ssai.dev">hello@ssai.dev</a><span>SSAI · migration systems</span></div>
         </div>
       </footer>
-    </main>
+    </>
   );
 }

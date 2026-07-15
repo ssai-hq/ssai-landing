@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function ThesisPage() {
-  redirect("/#thesis");
+  redirect("/#why");
 }

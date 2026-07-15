@@ -1,26 +1,5 @@
 import localFont from "next/font/local";
 
-export const geist = localFont({
-  src: "../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
-  variable: "--font-face-body",
-  display: "swap",
-  fallback: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    "Segoe UI",
-    "Helvetica",
-    "Arial",
-    "sans-serif",
-  ],
-});
-
-export const jetbrainsMono = localFont({
-  src: "../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2",
-  variable: "--font-face-mono",
-  display: "swap",
-  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
-});
-
 export const tiempos = localFont({
   src: [
     {
@@ -32,4 +11,20 @@ export const tiempos = localFont({
   variable: "--font-face-title",
   display: "swap",
   fallback: ["Georgia", "serif"],
+});
+
+export const geist = localFont({
+  src: "../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
+  variable: "--font-face-body",
+  display: "swap",
+  weight: "100 900",
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
+});
+
+export const geistMono = localFont({
+  src: "../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2",
+  variable: "--font-face-mono",
+  display: "swap",
+  weight: "100 900",
+  fallback: ["SFMono-Regular", "Menlo", "monospace"],
 });

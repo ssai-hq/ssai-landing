@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SSAI Landing
 
-## Getting Started
+Marketing site for SSAI. Jumpship is SSAI's database migration agent.
 
-First, run the development server:
+The current landing page is intentionally scoped to the first production corridor:
+MongoDB Atlas to customer-owned Supabase PostgreSQL. Product claims and terminology
+follow the Jumpship MVP implementation packet at:
+
+`../mdhq/*MIGRATIONPIVOT/jumpship-docs/mvp-implementation/`
+
+## Local development
+
+Requirements:
+
+- Node.js 24 or newer
+- pnpm 11.7.0
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install --frozen-lockfile
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Watermelon comparison branch
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This worktree runs the `experiment/watermelon-ui-landing` branch. It uses
+[Watermelon UI](https://ui.watermelon.sh/home) as a shadcn-compatible registry
+for selected interactions, then adapts those components to SSAI's typography,
+radius, color, motion, and accessibility rules.
 
-## Learn More
+The comparison intentionally uses Watermelon only for the floating navigation,
+migration-act tabs, and canonical phase indicator. Evidence, consent, trust,
+and rollback surfaces remain explicit SSAI ledgers instead of decorative
+component demos.
 
-To learn more about Next.js, take a look at the following resources:
+Registry sources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `https://registry.watermelon.sh/r/continuous-tabs.json`
+- `https://registry.watermelon.sh/r/step-indicator.json`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Watermelon's public terms permit copying components subject to the relevant
+licenses and repository terms. Confirm component-level license provenance
+before promoting this experiment to production.
 
-## Deploy on Vercel
+## Verification
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm lint
+pnpm exec tsc --noEmit --incremental false
+pnpm build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The homepage is server-rendered. A small client island powers the accessible mobile
+navigation; the migration content and product artifact remain server-rendered. Legacy
+qualification routes and pre-pivot landing components were removed in the greenfield
+rebuild.
