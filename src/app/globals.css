@@ -45,8 +45,8 @@
   --radius-instrument: 18px;
   --shadow-float: 0 1px 2px oklch(20% 0.01 82 / 0.06), 0 16px 50px oklch(20% 0.01 82 / 0.07);
   --shadow-glass: 0 1px 0 oklch(100% 0 0 / 0.72) inset, 0 1px 2px oklch(20% 0.01 82 / 0.08), 0 18px 55px oklch(20% 0.01 82 / 0.12);
-  --nav-glass-surface: color-mix(in srgb, var(--surface) 50%, transparent);
-  --nav-glass-rule: oklch(100% 0.008 88 / 0.94);
+  --nav-glass-surface: oklch(99.2% 0.007 88 / 0.78);
+  --nav-glass-rule: oklch(100% 0.008 88 / 0.88);
 }
 
 * {
@@ -175,7 +175,6 @@ summary:focus-visible {
 
 .site-header__inner {
   position: relative;
-  isolation: isolate;
   width: min(1240px, calc(100% - (var(--page-gutter) * 2)));
   min-height: 58px;
   margin: 0 auto;
@@ -188,13 +187,12 @@ summary:focus-visible {
   background: var(--nav-glass-surface);
   background-clip: padding-box;
   box-shadow:
-    0 1px 0 oklch(100% 0.008 88 / 0.9) inset,
-    0 -1px 0 oklch(100% 0.008 88 / 0.34) inset,
+    0 1px 0 oklch(100% 0.008 88 / 0.96) inset,
+    0 -1px 0 oklch(100% 0.008 88 / 0.46) inset,
     0 2px 7px oklch(20% 0.01 82 / 0.05),
-    0 16px 42px oklch(20% 0.01 82 / 0.1);
-  -webkit-backdrop-filter: blur(22px) saturate(1.45);
-  backdrop-filter: blur(22px) saturate(1.45);
-  transform: translateZ(0);
+    0 18px 48px oklch(20% 0.01 82 / 0.12);
+  -webkit-backdrop-filter: blur(12px) saturate(1.18);
+  backdrop-filter: blur(12px) saturate(1.18);
   pointer-events: auto;
 }
 
