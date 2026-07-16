@@ -24,7 +24,7 @@ The visual direction is warm-light, editorial, and instrument-like:
 - monospaced provenance used sparingly;
 - hairlines, ledgers, phase rails, evidence rows, and version chips;
 - one clear corridor moving from source understanding to verified target;
-- no decorative dashboard mosaic and no generic AI spectacle.
+- no decorative dashboard mosaic, decorative gradient, or generic AI spectacle.
 
 Density comes from grouping related facts, reducing repetition, and using structured rows. It does not come from shrinking type, stacking cards, or filling the page with badges.
 
@@ -35,7 +35,7 @@ Density comes from grouping related facts, reducing repetition, and using struct
 - The wordmark may render as lowercase **ssai**.
 - Product prose uses **SSAI** and **Jumpship**.
 - The visible launch corridor is **MongoDB Atlas → Supabase/PostgreSQL**.
-- No other source or target logo may imply an available corridor.
+- No other source or target logo may imply an available corridor. Official marks may appear in an explicitly labeled illustrative-future roulette when adjacent copy states that the pair is not currently supported.
 
 The first viewport must make the product, agent, corridor, value, and primary action legible without scrolling.
 
@@ -95,7 +95,8 @@ Every claim about action should show a boundary, basis, or reversal path nearby.
 - Green, amber, and red appear as small dots, text, two-pixel rules, or low-tint labels paired with words.
 - Hairlines and tonal changes establish structure before shadows.
 - Pure black is not used.
-- Low-chroma blue and coral refraction may sit behind the hero glass. Gradient text, purple haze, and rainbow AI treatments are not used.
+- Decorative gradients are not used on backgrounds, surfaces, controls, type, or illustrations. Flat color, translucency, structural one-pixel grids, and hard-edged CSS masks remain allowed when they clarify depth or system structure.
+- Gradient text, purple haze, rainbow AI treatments, and blurred color-orb decoration are not used.
 - The landing page remains warm-light. It does not add a decorative global dark mode.
 
 ## Typography
@@ -114,11 +115,11 @@ Tiempos is loaded from the repository-local WOFF2 through `next/font/local`. Mon
 
 | Tier | Desktop | Narrow | Family and use |
 |---|---:|---:|---|
-| Hero | 64/60 | 46/43 | Tiempos 400; one H1 only |
-| Section display | 42/44 | 35/36 | Tiempos 400; major narrative turn |
-| Headline | 28/32 | 24/28 | Tiempos 400; proof-surface heading |
-| Title | 20/25 | 19/24 | Tiempos 400 or Geist 600 |
-| Body lead | 18/29 | 17/27 | Geist 400; hero and section introduction |
+| Hero | 54/52 | 40/39 | Tiempos 400; one H1 only |
+| Section display | 36/38 | 30/32 | Tiempos 400; major narrative turn |
+| Headline | 25/29 | 22/26 | Tiempos 400; proof-surface heading |
+| Title | 18/23 | 17/22 | Tiempos 400 or Geist 600 |
+| Body lead | 16/26 | 15/24 | Geist 400; hero and section introduction |
 | Body | 15/24 | 15/23 | Geist 400; standard reading text |
 | Control | 14/20 | 15/20 | Geist 550; buttons and navigation |
 | Label | 11/14 | 11/14 | Geist 650; uppercase, 0.07em tracking |
@@ -131,6 +132,7 @@ Tiempos is loaded from the repository-local WOFF2 through `next/font/local`. Mon
 - Tiempos does not appear in buttons, pills, table headers, or metadata.
 - Geist Mono never carries the main value proposition.
 - Reading text never drops below 11px. A scaled, non-interactive illustrative instrument may use 8-10px metadata when its full meaning remains available in adjacent text and accessible labels.
+- Standard body copy stays at least 15px, functional labels stay at least 11px, and controls retain a 44px hit target. Compactness comes from display scale, spacing, and composition before these floors are reduced.
 - Emphasis comes from hierarchy, weight, and spacing, not gradient text or excessive bolding.
 
 ## Grid and Rhythm
@@ -152,6 +154,7 @@ Tiempos is loaded from the repository-local WOFF2 through `next/font/local`. Mon
 - Keep related proof and explanation adjacent.
 - Avoid ornamental whitespace that pushes the corridor or value proposition below the fold.
 - Avoid cards nested inside cards. Use indentation, section rules, and background tone instead.
+- The hero keeps its established scale. Every section below it applies an additional 10 percent density reduction relative to the preceding compact pass across display type, major illustrations, tables, and section padding. Do not apply a whole-page transform or shrink standard body copy below 15px, functional labels below 11px, provider names below 13px, or interactive targets below 44px to achieve this.
 
 ## Landing Information Architecture
 
@@ -159,134 +162,105 @@ Tiempos is loaded from the repository-local WOFF2 through `next/font/local`. Mon
 
 A compact floating glass header with:
 
-- the canonical SSAI logo from `public/logo-full.png`;
-- links to Scope, Protocol, Proof, and Trust;
+- the canonical SSAI lockup from `public/logo-full.png`; compact brand nodes elsewhere use `public/logo-icon.svg`, never a substitute letter such as `J`;
+- links to Why, How it works, Compare, Corridors, and Proof;
 - one primary CTA: **Migration review**;
-- a compact mobile menu preserving all four anchors.
+- a compact mobile menu preserving the same narrative anchors.
 
-Glass is purposeful here because navigation is a persistent layer above changing content. Match the established SSAI clear-glass recipe: a 25 percent warm-surface tint, a faint 20 percent hairline border, 4px backdrop blur, no pronounced glass shadow or saturation boost, and a solid fallback. Keep the 16px frame radius. The header must remain quiet enough to avoid becoming a product navigation replica.
+Glass is purposeful here because navigation is a persistent layer above changing content. Use a visibly frosted warm-surface recipe: roughly 72-82 percent surface opacity, a one-pixel white or white-translucent hairline, 10-14px backdrop blur with restrained saturation, a soft floating shadow, and a solid fallback. A dark border is not permitted. Keep the 16px frame radius. The header must retain enough background definition for the glass effect to be visible without reducing text contrast.
 
 ### 2. Hero
 
-Desktop composition: seven columns of proposition and five columns of proof.
+Desktop composition: a near-even proposition and illustration split. At 1099px and below it becomes one column with the illustration after the live job.
 
 The proposition contains:
 
-- eyebrow: **Database migrations, fully accounted for**;
-- H1: **MongoDB to PostgreSQL, without the leap of faith.**;
-- one short explanation naming SSAI and Jumpship;
+- no eyebrow;
+- H1: **SSAI makes databases swappable.**;
+- support: **General-purpose coding agents help you change code. They don't own a live database migration. SSAI's Jumpship agent designs the target, supervises data movement and live sync, verifies the result, and keeps rollback ready through cutover.**;
 - primary and secondary CTAs;
-- a compact trust line: read-only source, isolated migration cell, verified cutover, rollback window.
+- a compact illustrated live-job instrument naming the Atlas → Supabase route, snapshot, CDC, verification, and rollback state.
 
-The proof object is a landing-specific migration instrument, not a fake chat window. It should show a compact example of:
+The right visual is the transparent cutout at `public/ssai-migration-system-cutout.png`, not a fake product screenshot and not a rounded card. Its figure wrapper has no surface fill, border, shadow, or clipping radius. On desktop it sits high enough to align its meaningful visual mass with the first headline line. It communicates document records entering a controlled migration chamber, emerging as a relational system, and retaining a return path. It contains no embedded copy or third-party marks; the figure has meaningful alt text and a quiet **understand → transform → prove → reverse** caption.
 
-- source evidence discovered;
-- target-model decision;
-- current phase;
-- verification or rollback state;
-- evidence/version identifiers.
+The background grid, orbit, glow, and live-record dots move slowly through transforms and opacity. They remain subtle, preserve text contrast, and become static under reduced motion.
 
-Any sample state is labeled **Illustrative migration**.
+Any sample state is labeled **Illustrative live job**. The live-job instrument is secondary evidence, not a third hero column. If it makes the first viewport crowded, place it as a compact full-width row below the proposition/illustration pair or remove it; never reduce headline clarity to preserve it.
 
-### 3. Corridor strip
+### 3. Where coding agents stop
 
-A full-width hairline band directly after the hero:
+Use one contiguous three-panel story, not a proof strip or six-card failure ribbon:
 
-**MongoDB Atlas** → discovery and design → deterministic migration → **Supabase/PostgreSQL**
+- partial evidence: code, data, writers, and human intent remain fragmented;
+- missing machinery: a generated artifact does not supply backfill, CDC, quarantine, verification, gates, receipts, or rollback;
+- false confidence: equal record counts can still hide changed meaning, ghost relationships, ordering drift, and regressions.
 
-Supporting labels can name GitHub context, CDC, verification, and rollback. The strip must not include unrelated database logos.
+Each panel pairs one diagram with one claim and short explanation. The closing line is **You can copy every row and still migrate the business incorrectly.**
 
-### 4. Why copying fails
+### 4. Where Jumpship takes over
 
-Show the problem as a dense comparison between document reality and relational responsibility:
+Mirror the problem triptych with three SSAI capabilities that a developer plus coding agent does not obtain from a generated script:
 
-- field drift → explicit type policy;
-- embedded ownership → tables, foreign keys, or intentional JSONB;
-- app-enforced references → constraints and identity translation;
-- multiple writers → writer inventory and cutover choreography;
-- live changes → CDC, reconciliation, and headroom;
-- “looks loaded” → canonical and query-semantic verification.
+- one accountable trajectory keeps evidence, decisions, unknowns, and undo boundaries coherent over time;
+- a typed signed handoff keeps the model outside the record path while one compiled transform drives baseline and CDC;
+- independent proof, rehearsed cutover, and a qualified current reverse path make authority changes defensible.
 
-This section should feel like an annotated ledger, not six floating benefit cards.
+End with the operating axiom: Jumpship reasons and supervises; the corridor engine moves records; humans authorize cutover and decommission.
 
-### 5. One migration trajectory
+This operational handoff is an intentional dark band using Focus dark ground and the same one-pixel grid language as the rollback evidence instrument inside the FAQ. It is not pure black and contains no gradient. The grid, flat tonal surfaces, white type, and hairline rules supply structure. Its technology-agnostic headline states the complete trajectory: **SSAI runs the whole migration, from target design through live sync, independent proof, cutover, rollback, and source decommission.** **Target design** uses SSAI Blue as the primary emphasis and **source decommission** uses SSAI Coral as the secondary endpoint emphasis; neither color carries status by itself. Provider names belong in the explicitly scoped corridor surface, not this platform-level value statement.
 
-Use a phase rail or table with the complete path:
+### 5. Planning comparison
 
-1. Connect
-2. Discover
-3. Foundation
-4. Snapshot and census
-5. Design and decide
-6. Rehearse and quarantine
-7. Load and CDC
-8. Verify
-9. Cut over
-10. Roll back or watch
-11. Decommission
+This is the primary conversion section. Use a warm-light, hairline-led comparison surface containing:
 
-Each phase gets one sentence describing its output and one compact evidence artifact. The rail is causal; it is not arbitrary navigation.
+- a baseline switch for internal team versus consultancy;
+- one intuitive operational input such as engineers assigned; loaded hourly cost belongs in the visible assumptions instead of being the unexplained headline control;
+- side-by-side time, customer hours, and modeled cost;
+- one shared time axis and aligned phase rows so duration differences cannot be exaggerated through independent scales;
+- animated but dimensionally stable phase timelines;
+- a clear bridge showing modeled customer hours redirected;
+- explicit **estimated customer engineering time saved** and **estimated customer engineering spend avoided before the SSAI fee** labels;
+- the assumptions that produce every figure and a visible disclaimer that the model is not a quote, benchmark, or delivery promise.
 
-### 6. What moves
+On narrow screens the two plans stack while retaining the same numeric domain and phase order. Numbers remain paired with labels and are never presented as observed customer results. The spend comparison covers customer engineering or consultancy spend only; it must not be called total savings, net savings, or return on investment until a real SSAI fee is included. The SSAI side is named **SSAI's Jumpship** and uses the canonical icon mark, never a `J` avatar.
 
-Present the work inside this corridor:
+### 6. Database migration routes
 
-- document shapes and BSON types;
-- embedded records and arrays;
-- identifiers and references;
-- history and lifecycle;
-- constraints and indexes;
-- bulk data;
-- live writes through change streams;
-- query semantics and integrity evidence;
-- reverse-sync and rollback state.
+Use nine official provider marks in two Apple Calendar-style vertical reels connected through a core bearing the canonical SSAI icon. The pair index exposes all 72 ordered non-self source-to-target combinations. Selection is manual through previous/next, direct-pair, and keyboard controls; there is no dedicated pause button. Reel motion uses a short eased settle and the detail surface transitions with stable height, opacity, and transform. It becomes an immediate state change under reduced motion.
 
-Do not label these as separate database corridors.
+The active pair is followed by one compact, icon-led four-cell definition row: **Model, Move, Prove, Recover**. Text stays fully readable and does not disappear behind iconography. MongoDB Atlas → Supabase PostgreSQL is labeled **Available launch corridor**. Each of the other 71 pairs is labeled **Illustrative future corridor** with adjacent copy saying it is not currently available or supported. Visibility in the reel is not a capability claim and does not imply that all 72 pairs have qualified execution playbooks.
 
-### 7. Agent plus deterministic engine
+Provider marks come from the pinned Simple Icons-backed package or approved vendor assets. Preserve official silhouette and color, show the provider name, and never hand-draw approximation logos.
 
-Use a two-column responsibility ledger:
+### 7. Proof, reversibility, and boundaries inside the FAQ
 
-| Jumpship | Deterministic engine |
-|---|---|
-| Investigates evidence | Executes compiled transforms |
-| Recommends target design | Loads snapshot and bulk data |
-| Explains uncertainty and trade-offs | Applies CDC and reconciliation |
-| Requests human decisions | Runs verification and gates |
-| Supervises the trajectory | Produces effect receipts |
+The buyer-question section is the landing page's single proof and trust destination. The former standalone verification, rollback, and structural-boundary sections are removed so the page does not repeat the same safety case in four places.
 
-The visual should make it impossible to infer that model output directly mutates records.
+Three expanded answers carry compact evidence instruments:
 
-### 8. Proof and reversibility
+- **Verification:** a five-layer ledger for accounting, business invariants, 100 percent canonical hashes, both-direction structure, and query semantics, followed by a signed integrity-envelope receipt.
+- **Isolation:** a read-only Atlas and repository flow into one isolated migration cell, then a one-way allowlist boundary into shared phase, decision, hash, and receipt metadata. A denial ledger names the actions Jumpship cannot perform.
+- **Rollback:** a dark-grid sequence from production-shaped rehearsal through fresh cutover consent, measured cutover, the qualified 72-hour reverse-sync window, and separately consented decommission.
 
-Show the relationship between:
+These are explanatory landing-page instruments, not simulated customer state. On narrow screens they become vertical ledgers without horizontal scrolling. Their labels, rules, and icons remain visible under reduced motion.
 
-- rehearsed runbook;
-- versioned mapping;
-- signed verification;
-- named-approver cutover;
-- 72-hour reverse-sync and rollback window;
-- rollback viability;
-- named-approver decommission;
-- honest retention and deletion states.
+### 8. Questions worth asking
 
-A horizontal reversibility timeline is preferred over a generic testimonial block.
+Use one non-collapsible, single-open buyer-question accordion that answers the objections a technical owner should resolve before cutover. The first guarantee question is open by default. Activating the open row keeps it open; activating another row transfers the open state, so the answer region never collapses to zero:
 
-### 9. Structural boundaries
+- the exact guarantee tier and why impossible guarantees block or downgrade honestly;
+- isolated-cell custody, source read-only access, and raw-evidence boundaries;
+- where customer time and spend may be reduced, with every comparison labeled as an assumption rather than a quote or benchmark;
+- how an immutable Jumpship agent bundle is evaluated, independently graded, and prevented from entering the deterministic record path;
+- the qualified reverse-sync and rollback contract;
+- the one currently available Atlas → Supabase/PostgreSQL corridor;
+- the product boundary: SSAI is the broader product, while Jumpship is its database-migration specialist agent.
 
-Use a compact incapability list:
+Add one verification question between guarantee and isolation: **How do you prove the migrated database still means the same thing?** Security is framed as the structural authority boundary, not only credential hygiene. Rollback explains both the qualified path back and the separate decommission consent that closes it.
 
-- cannot write the source;
-- cannot flip traffic by itself;
-- cannot bypass quarantine or consent;
-- cannot widen its tools or credentials;
-- cannot provision or destroy its own migration cell;
-- cannot delete retained proof early;
-- cannot claim success without verification.
+Each row uses one literal, locally owned Lucide Animated topic icon. The final product-and-agent distinction uses the registry Sparkles icon as a category signal, not as a claim that migration is magical. Collapsed topic tiles and category labels are monochrome; only the expanded row restores its existing restrained semantic color across the topic tile, label, disclosure control, and answer wash. Hovering or focusing anywhere on a row drives its icon drawing once; the icon does not require its own pointer hitbox. The disclosure responds once on open, and neither motion loops. Pointer-initiated disclosure uses a 180-220 ms exponential ease-out transition with stable copy measure. Keyboard activation is immediate, arrow/Home/End keys move between triggers, and reduced-motion mode removes SVG and spatial movement. Every trigger retains `aria-expanded`, a labelled answer region, visible focus, and a 44 px minimum target.
 
-Pair each statement with the enforcing class: source grant, isolated cell, broker policy, state gate, or evidence contract.
-
-### 10. Closing CTA
+### 9. Closing CTA
 
 Return to the visitor's actual migration:
 
@@ -328,13 +302,15 @@ Secondary copy should name the corridor and avoid implying support for other dat
 
 ### Icons
 
-- Use Lucide or a consistent line icon set.
+- Use Lucide React as the interface icon set, at a consistent 1.75 stroke.
+- Use reviewed local components from the Lucide Animated registry only when motion explains a real live transition such as snapshot, CDC, verification, rollback readiness, or route direction.
+- Animated icons have a static/reduced-motion equivalent, do not carry status alone, and do not loop only to attract attention.
 - Standard size: 18px.
 - Compact floor: 16px for controls and functional signals; a scaled illustrative instrument may use smaller non-interactive diagram marks.
-- Prominent maximum: 20px.
+- Prominent functional maximum: 24px.
 - Icons are functional signals, not decoration.
 - No emoji in interface chrome.
-- Third-party marks identify the launch corridor only; they do not form a capability logo wall.
+- Third-party marks retain their official shape/color and visible name. Non-launch pairs always carry the illustrative-future disclaimer.
 
 ### Data displays
 
@@ -402,17 +378,22 @@ Motion supports comprehension and never becomes the proof.
 - Micro state: 120-180ms.
 - Panel or disclosure: 180-240ms.
 - Section or phase transition: 260ms maximum.
+- Below-fold headings, grouped story panels, instruments, and CTA columns reveal once with opacity and at most 15px of vertical travel. Use 220-260ms exponential ease-out timing and 48ms stagger steps; the hero remains the single load-based signature entrance.
+- The floating header may show a two-pixel transform-only reading-progress rule and current-section link state. Hide the moving rule under reduced motion while retaining the current-section text state.
+- The reveal system is progressive enhancement. Server and no-JavaScript output remain fully visible, unsupported observers resolve immediately, and reveal styles are removed after settling so later hover and state transitions stay responsive.
 - Use transform and opacity for movement.
 - Do not animate layout-affecting width, height, margin, or padding.
 - Progress animation must preserve stable dimensions.
-- No bounce, elastic overshoot, cursor trails, scan sweeps, or perpetual decorative loops.
-- Reduced-motion mode removes movement while keeping every state legible.
+- No bounce, elastic overshoot, cursor trails, or scan sweeps. Long ambient loops are limited to the subtle hero field; live-state loops must explain active work and pause when irrelevant.
+- Repeating or self-advancing interactive motion pauses while its region is hovered or contains focus; selectors should be manual by default when direct control tells the story equally well.
+- Reduced-motion mode removes autoplay, inertial reel travel, and spatial movement while keeping every state legible through immediate replacement or a restrained crossfade.
 
 ## Responsive Behavior
 
 Acceptance viewports:
 
 - 375 × 812
+- 320 × 568
 - 768 × 1024
 - 1280 × 800
 - 1440 × 900
@@ -521,6 +502,10 @@ The landing page is not:
 - [ ] Tiempos Text, Geist Sans, and Geist Mono are self-hosted.
 - [ ] SSAI Blue and SSAI Coral match their exact values.
 - [ ] Warm-light, hairline-first, visually dense composition holds at all acceptance viewports.
+- [ ] No decorative gradient appears; structural grids, flat-color masks, and translucency remain legible without it.
+- [ ] The navbar uses its white hairline and restrained blur, and the transparent hero cutout has no card container.
+- [ ] The operational handoff uses the flat dark-grid treatment while the planning comparison uses one honest shared axis.
+- [ ] All 72 reel pairs are reachable, but only Atlas → Supabase is presented as available and the other 71 are explicitly illustrative future routes.
 - [ ] Keyboard, focus, contrast, reflow, touch-target, and reduced-motion checks pass.
 - [ ] Illustrative product state is visibly labeled.
 - [ ] An intended visitor can identify the product, agent, corridor, value, safety model, and next action within ten seconds.

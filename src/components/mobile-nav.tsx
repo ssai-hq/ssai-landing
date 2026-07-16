@@ -4,10 +4,10 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const links = [
-  ["Scope", "#scope"],
-  ["Protocol", "#protocol"],
-  ["Proof", "#proof"],
-  ["Trust", "#trust"],
+  ["Why", "#why"],
+  ["How it works", "#how"],
+  ["Compare", "#compare"],
+  ["Corridors", "#corridors"],
 ] as const;
 
 export function MobileNav() {
@@ -63,7 +63,7 @@ export function MobileNav() {
         aria-label="Mobile navigation"
       >
         {links.map(([label, href], index) => (
-          <a href={href} key={href} onClick={() => setOpen(false)}>
+          <a data-section-nav href={href} key={href} onClick={() => setOpen(false)}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             {label}
           </a>

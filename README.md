@@ -39,6 +39,21 @@ Registry sources:
 - `https://registry.watermelon.sh/r/continuous-tabs.json`
 - `https://registry.watermelon.sh/r/step-indicator.json`
 
+The buyer-question accordion uses locally owned, reviewed Lucide Animated
+components for its seven topic icons. The source components are MIT licensed,
+have no runtime dependency on the registry, and are adapted only for valid
+button markup, SSAI motion timing, and reduced-motion behavior.
+
+Lucide Animated registry sources, reviewed 2026-07-16:
+
+- `https://lucide-animated.com/r/shield-check.json`
+- `https://lucide-animated.com/r/fingerprint.json`
+- `https://lucide-animated.com/r/lock-keyhole.json`
+- `https://lucide-animated.com/r/badge-percent.json`
+- `https://lucide-animated.com/r/scan-text.json`
+- `https://lucide-animated.com/r/refresh-ccw.json`
+- `https://lucide-animated.com/r/waypoints.json`
+
 Watermelon's public terms permit copying components subject to the relevant
 licenses and repository terms. Confirm component-level license provenance
 before promoting this experiment to production.
